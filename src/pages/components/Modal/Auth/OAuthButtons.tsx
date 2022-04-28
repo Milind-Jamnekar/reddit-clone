@@ -1,10 +1,21 @@
-import { Button, Flex, Image } from "@chakra-ui/react";
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
 const OAuthButtons: React.FC = () => {
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  console.log(user);
+
   return (
     <Flex direction="column" width="100%" mb={4}>
-      <Button variant="oauth" mb={2}>
+      <Button
+        variant="oauth"
+        mb={2}
+        isLoading={loading}
+        onClick={() => signInWithGoogle()}
+      >
         <Image
           src="/images/googlelogo.png"
           alt="Google logo"
@@ -14,6 +25,12 @@ const OAuthButtons: React.FC = () => {
         Continue with google
       </Button>
       <Button>Some other provider</Button>
+      {error && (
+        <Text color="red.500" textAlign="center" fontSize="10spt">
+          {" "}
+          {firebaseErrors[error.message as keyof typeof firebaseErrors]}
+        </Text>
+      )}
     </Flex>
   );
 };
