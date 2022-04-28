@@ -1,10 +1,8 @@
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
-import { motion } from "framer-motion";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "./../../../firebase/clientApp";
 
 const variants = {
   enter: { opacity: 0, x: 50 },
@@ -19,9 +17,6 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //Update input Data
     setSignp((prev) => ({
@@ -29,7 +24,7 @@ const Login: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const onSubmit = () => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
   return (
     <motion.div
       initial="enter"
