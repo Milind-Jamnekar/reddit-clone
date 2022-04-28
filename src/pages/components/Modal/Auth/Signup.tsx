@@ -42,12 +42,14 @@ const Signup: React.FC = () => {
       setError("Password doesn't match 🙄");
       return;
     }
+    // sends data to athenticate
     createUserWithEmailAndPassword(signUp.email, signUp.password)
       .then((val) => {
         console.log(val);
       })
       .catch((reson) => console.log(reson));
   };
+
   return (
     <motion.div
       initial="enter"
@@ -56,6 +58,7 @@ const Signup: React.FC = () => {
       variants={variants}
     >
       <form onSubmit={onSubmit}>
+        {/* Email input  */}
         <Input
           required
           name="email"
@@ -72,6 +75,7 @@ const Signup: React.FC = () => {
             borderColor: "blue.500",
           }}
         />
+        {/* password input  */}
         <Input
           required
           name="password"
@@ -88,6 +92,7 @@ const Signup: React.FC = () => {
             borderColor: "blue.500",
           }}
         />
+        {/* confirm password input  */}
         <Input
           required
           name="confirmPassword"
@@ -104,15 +109,18 @@ const Signup: React.FC = () => {
             borderColor: "blue.500",
           }}
         />
-        {(error || userError) && (
-          <Text textAlign="center" fontSize="10pt" color="red.500" mb="5px">
-            {error ||
-              firebaseErrors[userError?.message as keyof typeof firebaseErrors]}
-          </Text>
-        )}
+        {/* any error will be apear here  */}
+        <Text textAlign="center" fontSize="10pt" color="red.500" mb="5px">
+          {error ||
+            firebaseErrors[userError?.message as keyof typeof firebaseErrors]}
+        </Text>
+
+        {/* Submit button  */}
         <Button type="submit" width="100%" h="36px" mb={2} isLoading={loading}>
           Submit
         </Button>
+
+        {/* redirect to login component  */}
         <Flex fontSize="10pt" gap={1} justify="center">
           <Text>Already redditor ?</Text>
           <Text
