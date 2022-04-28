@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
 import { motion } from "framer-motion";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "./../../../firebase/clientApp";
 
 const variants = {
   enter: { opacity: 0, x: 50 },
@@ -12,13 +14,17 @@ const variants = {
 
 const Login: React.FC = () => {
   const setModalState = useSetRecoilState(authModalState);
-  const [user, setUser] = useState({
+  const [signup, setSignp] = useState({
     email: "",
     password: "",
   });
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //Update input Data
-    setUser((prev) => ({
+    setSignp((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
