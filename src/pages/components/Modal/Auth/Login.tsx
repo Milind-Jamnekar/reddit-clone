@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
 const variants = {
   enter: { opacity: 0, x: 50 },
@@ -12,19 +15,28 @@ const variants = {
 
 const Login: React.FC = () => {
   const setModalState = useSetRecoilState(authModalState);
-  const [signup, setSignp] = useState({
+  const [login, setLogin] = useState({
     email: "",
     password: "",
   });
 
+  const [loginError, setLoginError] = useState("");
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //Update input Data
-    setSignp((prev) => ({
+    setLogin((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoginError("");
+    signInWithEmailAndPassword(login.email, login.password);
+  };
   return (
     <motion.div
       initial="enter"
@@ -65,7 +77,10 @@ const Login: React.FC = () => {
             borderColor: "blue.500",
           }}
         />
-        <Button type="submit" width="100%" h="36px" mb={2}>
+        <Text textAlign="center" color="red.500" fontSize="10pt" mb="5px">
+          {firebaseErrors[error?.message as keyof typeof firebaseErrors]}
+        </Text>
+        <Button type="submit" width="100%" h="36px" mb={2} isLoading={loading}>
           Submit
         </Button>
         <Flex fontSize="10pt" gap={1} justify="center">
