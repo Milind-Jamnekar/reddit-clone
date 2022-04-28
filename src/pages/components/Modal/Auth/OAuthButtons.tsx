@@ -6,7 +6,6 @@ import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
 const OAuthButtons: React.FC = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  console.log(user);
 
   return (
     <Flex direction="column" width="100%" mb={4}>
@@ -26,7 +25,7 @@ const OAuthButtons: React.FC = () => {
       </Button>
       <Button>Some other provider</Button>
       {error && (
-        <Text color="red.500" textAlign="center" fontSize="10spt">
+        <Text color="red.500" textAlign="center" fontSize="10pt" my="5px">
           {" "}
           {firebaseErrors[error.message as keyof typeof firebaseErrors]}
         </Text>

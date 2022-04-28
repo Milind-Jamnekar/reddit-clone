@@ -9,20 +9,29 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
+import { auth } from "../../../firebase/clientApp";
 import AuthInputs from "./AuthInputs";
 import OAuthButtons from "./OAuthButtons";
 
 const AuthModal: React.FC = () => {
   const [ModalState, setModalState] = useRecoilState(authModalState);
 
+  const [user, loading, error] = useAuthState(auth);
+
   const handleClose = () =>
     setModalState((prev) => ({
       ...prev,
       open: false,
     }));
+
+  useEffect(() => {
+    if (user) handleClose();
+  }, [user]);
+
   return (
     <>
       <Modal isOpen={ModalState.open} onClose={handleClose}>
@@ -47,7 +56,9 @@ const AuthModal: React.FC = () => {
               justify="center"
               width="70%"
             >
+              {/* OAuth btns  */}
               <OAuthButtons />
+              {/* Divider  */}
               <Flex direction="row" width="100%" align="center">
                 <Divider />
                 <Text color="gray.500" mx={2} fontWeight="700">
@@ -55,6 +66,7 @@ const AuthModal: React.FC = () => {
                 </Text>
                 <Divider />
               </Flex>
+              {/* Login and Singup inputs  */}
               <AuthInputs />
             </Flex>
           </ModalBody>
