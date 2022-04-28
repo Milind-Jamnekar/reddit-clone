@@ -1,8 +1,11 @@
 import { Input, Button, Flex, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
+import { auth } from "../../../firebase/clientApp";
+import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
 const variants = {
   enter: { opacity: 0, x: -50 },
@@ -17,6 +20,11 @@ const Signup: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
+  const [createUserWithEmailAndPassword, user, loading, userError] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  // Input Changing event handler
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //Update input Data
     setSignUp((prev) => ({
@@ -24,7 +32,22 @@ const Signup: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const onSubmit = () => {};
+
+  //Form submission event handler
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    // password match check
+    if (signUp.password !== signUp.confirmPassword) {
+      setError("Password doesn't match 🙄");
+      return;
+    }
+    createUserWithEmailAndPassword(signUp.email, signUp.password)
+      .then((val) => {
+        console.log(val);
+      })
+      .catch((reson) => console.log(reson));
+  };
   return (
     <motion.div
       initial="enter"
@@ -81,7 +104,13 @@ const Signup: React.FC = () => {
             borderColor: "blue.500",
           }}
         />
-        <Button type="submit" width="100%" h="36px" mb={2}>
+        {(error || userError) && (
+          <Text textAlign="center" fontSize="10pt" color="red.500" mb="5px">
+            {error ||
+              firebaseErrors[userError?.message as keyof typeof firebaseErrors]}
+          </Text>
+        )}
+        <Button type="submit" width="100%" h="36px" mb={2} isLoading={loading}>
           Submit
         </Button>
         <Flex fontSize="10pt" gap={1} justify="center">
