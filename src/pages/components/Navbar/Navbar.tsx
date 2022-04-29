@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
 
   return (
-    <Flex bg="white" h="50px" padding="6px 12px" align="center">
+    <Flex gap={2} bg="white" h="50px" padding="6px 12px" align="center">
       <Flex align="center" justify="center">
         <Image src="/images/redditFace.svg" h="30px" alt="Reddit Face logo" />
         <Image
