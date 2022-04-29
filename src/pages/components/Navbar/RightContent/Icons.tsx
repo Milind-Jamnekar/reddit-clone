@@ -45,7 +45,7 @@ export const Icons: React.FC = () => {
             <Icon as={IoVideocamOutline} fontSize={25} />
           </Flex>
         </Flex>
-        <>
+        <Flex gap={2}>
           <Flex
             padding={1}
             cursor="pointer"
@@ -71,7 +71,7 @@ export const Icons: React.FC = () => {
           >
             <Icon as={GrAdd} fontSize={23} />
           </Flex>
-        </>
+        </Flex>
       </Flex>
     </>
   );
