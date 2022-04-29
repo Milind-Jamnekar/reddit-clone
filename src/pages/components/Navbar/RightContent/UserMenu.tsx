@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Flex,
   Icon,
@@ -8,6 +9,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Text,
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
 import React from "react";
@@ -31,15 +33,29 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     <Menu>
       <MenuButton
         cursor="pointer"
-        padding="3px 6px"
+        padding={{ base: "3px 6px", md: "0px 6px" }}
         borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.300" }}
       >
         <Flex align="center">
           {user ? (
             <>
-              <Icon as={FaRedditSquare} fontSize={27} color="gray.300" />
-              <ChevronDownIcon fontSize={22} />
+              <Icon fontSize={28} mr={1} color="gray.300" as={FaRedditSquare} />
+              <Box
+                display={{ base: "none", lg: "flex" }}
+                flexDirection="column"
+                fontSize="8pt"
+                alignItems="flex-start"
+                mr={8}
+              >
+                <Text fontSize={12} fontWeight={700}>
+                  {user?.displayName || user?.email?.split("@")[0]}
+                </Text>
+                <Flex alignItems="center">
+                  <Icon as={IoSparkles} color="brand.100" mr={1} />
+                  <Text color="gray.400">1 karma</Text>
+                </Flex>
+              </Box>
             </>
           ) : (
             <Icon as={VscAccount} fontSize={25} color="gray.300" />
