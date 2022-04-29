@@ -4,7 +4,7 @@ import React from "react";
 
 const SearchInput: React.FC = () => {
   return (
-    <Flex flexGrow={1} ml={2} align="center">
+    <Flex flexGrow={1} align="center">
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
