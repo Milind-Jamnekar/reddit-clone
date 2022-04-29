@@ -11,15 +11,16 @@ import {
 export const Icons: React.FC = () => {
   return (
     <>
-      <Flex>
+      <Flex gap={2}>
         <Flex
           display={{ base: "none", md: "flex" }}
           align="center"
           borderRight="1px solid"
           borderColor="gray.300"
+          paddingRight={2}
+          gap={2}
         >
           <Flex
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
@@ -28,7 +29,6 @@ export const Icons: React.FC = () => {
             <Icon as={BsArrowUpRightCircle} fontSize={23} />
           </Flex>
           <Flex
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
@@ -37,7 +37,6 @@ export const Icons: React.FC = () => {
             <Icon as={IoFilterCircleOutline} fontSize={25} />
           </Flex>
           <Flex
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
@@ -48,7 +47,6 @@ export const Icons: React.FC = () => {
         </Flex>
         <>
           <Flex
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
@@ -57,7 +55,6 @@ export const Icons: React.FC = () => {
             <Icon as={BsChatDots} fontSize={23} />
           </Flex>
           <Flex
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
@@ -67,7 +64,6 @@ export const Icons: React.FC = () => {
           </Flex>
           <Flex
             display={{ base: "none", md: "flex" }}
-            mx={1.5}
             padding={1}
             cursor="pointer"
             borderRadius={4}
