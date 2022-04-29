@@ -8,6 +8,7 @@ import {
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/clientApp";
+import { Directory } from "./Directory/Directory";
 import RightContent from "./RightContent/RightContent";
 import SearchInput from "./SearchInput";
 
@@ -15,7 +16,14 @@ const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
 
   return (
-    <Flex gap={2} bg="white" h="50px" padding="6px 12px" align="center">
+    <Flex
+      gap={2}
+      bg="white"
+      h="50px"
+      padding="6px 12px"
+      align="center"
+      justifyContent={user ? "space-between" : "center"}
+    >
       <Flex align="center" justify="center">
         <Image src="/images/redditFace.svg" h="30px" alt="Reddit Face logo" />
         <Image
@@ -25,7 +33,8 @@ const Navbar: React.FC = () => {
           alt="Reddit text logo"
         />
       </Flex>
-      <SearchInput />
+      {user && <Directory />}
+      <SearchInput user={user} />
       <RightContent user={user} />
     </Flex>
   );
