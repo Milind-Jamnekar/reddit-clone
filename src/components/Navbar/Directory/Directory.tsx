@@ -1,7 +1,17 @@
-import { Flex, HStack, Icon, Menu, MenuButton, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  HStack,
+  Icon,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import { TiHome } from "react-icons/ti";
 import React from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Communities } from "./Communitites";
 
 export const Directory: React.FC = () => {
   return (
@@ -23,6 +33,9 @@ export const Directory: React.FC = () => {
           <ChevronDownIcon fontSize={23} />
         </HStack>
       </MenuButton>
+      <MenuList>
+        <Communities />
+      </MenuList>
     </Menu>
   );
 };
