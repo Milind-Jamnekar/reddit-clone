@@ -1,16 +1,15 @@
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Flex,
   HStack,
   Icon,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { TiHome } from "react-icons/ti";
 import React from "react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { TiHome } from "react-icons/ti";
 import { Communities } from "./Communitites";
 
 export const Directory: React.FC = () => {
