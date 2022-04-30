@@ -1,7 +1,5 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Flex,
   Icon,
   Menu,
@@ -13,16 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
 import React from "react";
-
+import { CgProfile } from "react-icons/cg";
 //Icons
 import { FaRedditSquare } from "react-icons/fa";
-import { VscAccount } from "react-icons/vsc";
 import { IoSparkles } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogin } from "react-icons/md";
-import { auth } from "../../../firebase/clientApp";
+import { VscAccount } from "react-icons/vsc";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
+import { auth } from "../../../firebase/clientApp";
+
 type UserMenuProps = {
   user?: User | null;
 };
