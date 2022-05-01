@@ -18,24 +18,68 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 //Icons
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
-
-import React, { useState } from "react";
+import { auth, firestore } from "../../../firebase/clientApp";
 
 export const CreateCommunityModal: React.FC<{
   open: boolean;
   handleClose: () => void;
 }> = ({ open, handleClose }) => {
+  const [user] = useAuthState(auth);
   const [communityName, setCommunityName] = useState("");
   const [charCount, setCharCount] = useState(21);
   const [communityType, setCommunityType] = useState("public");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onCommunityTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommunityType(e.target.name);
     console.log(e.target.name);
+  };
+
+  const handleCreateCommunity = async () => {
+    if (error) setError("");
+
+    //Validate Community name
+    const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (format.test(communityName)) {
+      setError(
+        "Community name must be 3-21 characters and can only contain letters, numbers and characters"
+      );
+      return;
+    }
+
+    if (communityName === "") {
+      setError("You forget to type the communtiy name senpai 😑");
+    }
+
+    setLoading(true);
+    try {
+      const communityDocRef = doc(firestore, "communities", communityName);
+
+      //Check if document is already present
+      const communityDoc = await getDoc(communityDocRef);
+      if (communityDoc.exists())
+        throw new Error(
+          `Sorry ${communityName} is already exists 😟, Try another`
+        );
+
+      await setDoc(communityDocRef, {
+        creatorId: user?.uid,
+        createdAt: serverTimestamp(),
+        numberOfMembers: 1,
+        privacyType: communityType,
+      });
+    } catch (error: any) {
+      console.log("Handled errors", error);
+      setError(error.message);
+    }
+    setLoading(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +134,11 @@ export const CreateCommunityModal: React.FC<{
                 <Text fontSize="9pt" color={charCount === 0 ? "red" : ""}>
                   {charCount} characters remaining
                 </Text>
+                {error && (
+                  <Text fontSize={"9pt"} color="red.400">
+                    {error}
+                  </Text>
+                )}
               </Box>
 
               <Stack spacing={2}>
@@ -173,7 +222,9 @@ export const CreateCommunityModal: React.FC<{
             >
               Close
             </Button>
-            <Button onClick={() => {}}>Create community</Button>
+            <Button isLoading={loading} onClick={handleCreateCommunity}>
+              Create community
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

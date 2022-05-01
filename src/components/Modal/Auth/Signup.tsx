@@ -1,10 +1,12 @@
 import { Input, Button, Flex, Text } from "@chakra-ui/react";
+import { User } from "firebase/auth";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
-import { auth } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
 import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
 const variants = {
@@ -45,6 +47,19 @@ const Signup: React.FC = () => {
     // sends data to athenticate
     createUserWithEmailAndPassword(signUp.email, signUp.password);
   };
+
+  const createUserDocument = async (user: User) => {
+    await addDoc(
+      collection(firestore, "users"),
+      JSON.parse(JSON.stringify(user))
+    );
+  };
+
+  useEffect(() => {
+    if (user) {
+      createUserDocument(user.user);
+    }
+  }, [user]);
 
   return (
     <motion.div
