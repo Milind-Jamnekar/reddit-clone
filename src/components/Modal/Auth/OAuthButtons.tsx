@@ -12,7 +12,7 @@ const OAuthButtons: React.FC = () => {
 
   const createUserDocument = async (user: User) => {
     const userDocRef = await doc(firestore, "users", user.uid);
-    await setDoc(userDocRef, user);
+    await setDoc(userDocRef, JSON.parse(JSON.stringify(user)));
   };
 
   useEffect(() => {
