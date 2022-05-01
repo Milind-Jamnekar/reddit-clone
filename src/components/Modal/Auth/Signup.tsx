@@ -43,11 +43,7 @@ const Signup: React.FC = () => {
       return;
     }
     // sends data to athenticate
-    createUserWithEmailAndPassword(signUp.email, signUp.password)
-      .then((val) => {
-        console.log(val);
-      })
-      .catch((reson) => console.log(reson));
+    createUserWithEmailAndPassword(signUp.email, signUp.password);
   };
 
   return (
