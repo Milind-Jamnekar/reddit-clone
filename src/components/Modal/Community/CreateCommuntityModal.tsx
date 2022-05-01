@@ -18,7 +18,13 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  runTransaction,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 //Icons
@@ -61,19 +67,29 @@ export const CreateCommunityModal: React.FC<{
     setLoading(true);
     try {
       const communityDocRef = doc(firestore, "communities", communityName);
+      await runTransaction(firestore, async (transaction) => {
+        //Check if document is already present
+        const communityDoc = await transaction.get(communityDocRef);
+        if (communityDoc.exists())
+          throw new Error(
+            `Sorry r/${communityName} is already exists 😟, Try another`
+          );
 
-      //Check if document is already present
-      const communityDoc = await getDoc(communityDocRef);
-      if (communityDoc.exists())
-        throw new Error(
-          `Sorry ${communityName} is already exists 😟, Try another`
+        //Create new document
+        await transaction.set(communityDocRef, {
+          creatorId: user?.uid,
+          createdAt: serverTimestamp(),
+          numberOfMembers: 1,
+          privacyType: communityType,
+        });
+
+        await transaction.set(
+          doc(firestore, `users/${user?.uid}/communitySnippets`, communityName),
+          {
+            communityId: communityName,
+            isMod: true,
+          }
         );
-
-      await setDoc(communityDocRef, {
-        creatorId: user?.uid,
-        createdAt: serverTimestamp(),
-        numberOfMembers: 1,
-        privacyType: communityType,
       });
     } catch (error: any) {
       console.log("Handled errors", error);
