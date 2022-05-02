@@ -5,6 +5,7 @@ import { firestore } from "../../../firebase/clientApp";
 import safeJsonStringify from "safe-json-stringify";
 import { NotFound } from "../../../components/Modal/Community/NotFound";
 import Header from "../../../components/Communtiy/Header";
+import PageContent from "../../../components/Layout/PageContent";
 
 type CommunityPageProps = {
   data: Community;
@@ -17,6 +18,10 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
   return (
     <>
       <Header communityData={data} />
+      <PageContent>
+        <>LHS</>
+        <>RHS</>
+      </PageContent>
     </>
   );
 };
