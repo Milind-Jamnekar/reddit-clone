@@ -8,7 +8,7 @@ export const NotFound: React.FC = () => {
       <Text fontSize="4xl">
         Sorry, This community does not exists or has been banned! 😶
       </Text>
-      <Link href="/">
+      <Link href="/" passHref>
         <Button mt="4" size="lg">
           GO Home
         </Button>
