@@ -13,7 +13,7 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
 
   return (
     <>
-      <Flex direction="column" width="100%" height="190px">
+      <Flex direction="column" width="100%" height="220px">
         <Box height="70%" bg="blue.400" overflow="hidden">
           {communityData.bgImageURL ? (
             <Image
@@ -63,7 +63,7 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
               <Flex direction="row" gap={2}>
                 <Button
                   height="28px"
-                  display={{ base: "none", sm: "flex" }}
+                  // display={{ base: "none", sm: "flex" }}
                   width={{ base: "70px", md: "110px" }}
                   variant={isJoined ? "solid" : "outline"}
                   mt={2}
@@ -74,7 +74,7 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
                 <Button
                   height="28px"
                   width="28px"
-                  display={{ base: "none", sm: "flex" }}
+                  // display={{ base: "none", sm: "flex" }}
                   variant={isJoined ? "solid" : "outline"}
                   mt={2}
                   borderRadius="1243px"
