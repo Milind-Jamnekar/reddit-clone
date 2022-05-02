@@ -4,6 +4,7 @@ import { Community } from "../../../atoms/communitiesAtom";
 import { firestore } from "../../../firebase/clientApp";
 import safeJsonStringify from "safe-json-stringify";
 import { NotFound } from "../../../components/Modal/Community/NotFound";
+import Header from "../../../components/Communtiy/Header";
 
 type CommunityPageProps = {
   data: Community;
@@ -13,7 +14,11 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
   if (!data) {
     return <NotFound />;
   }
-  return <>{JSON.stringify(data)}</>;
+  return (
+    <>
+      <Header communityData={data} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
