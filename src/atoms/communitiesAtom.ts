@@ -5,5 +5,6 @@ export interface Community {
   numberOfMembers: string;
   privacyType: "public" | "protected" | "private";
   createdAt: Timestamp;
-  imageURL?: string;
+  profileImageURL?: string;
+  bgImageURL?: string;
 }
