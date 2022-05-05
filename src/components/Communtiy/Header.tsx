@@ -3,13 +3,18 @@ import * as React from "react";
 import { FaReddit } from "react-icons/fa";
 import { BsBellFill } from "react-icons/bs";
 import { Community } from "../../atoms/communitiesAtom";
+import { useCommunityData } from "../../hooks/useCommunityData";
 
 interface IHeaderProps {
   communityData: Community;
 }
 
 const Header: React.FC<IHeaderProps> = ({ communityData }) => {
-  const isJoined = false;
+  const { communityStateValue, onJoinOrLeaveCommunity, loading } =
+    useCommunityData();
+  const isJoined = !!communityStateValue.mySnippets.find(
+    (item) => item.communityId === communityData.id
+  );
 
   return (
     <>
@@ -68,8 +73,12 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
                   variant={isJoined ? "solid" : "outline"}
                   mt={2}
                   px={4}
+                  isLoading={loading}
+                  onClick={() =>
+                    onJoinOrLeaveCommunity(communityData, isJoined)
+                  }
                 >
-                  {isJoined ? "Join" : "Joined"}
+                  {isJoined ? "Joined" : "Join"}
                 </Button>
                 <Button
                   height="28px"
