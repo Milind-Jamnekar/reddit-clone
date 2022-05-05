@@ -49,10 +49,8 @@ const Signup: React.FC = () => {
   };
 
   const createUserDocument = async (user: User) => {
-    await addDoc(
-      collection(firestore, "users"),
-      JSON.parse(JSON.stringify(user))
-    );
+    const userCollectionRef = doc(firestore, "users", user.uid);
+    await setDoc(userCollectionRef, JSON.parse(JSON.stringify(user)));
   };
 
   useEffect(() => {
