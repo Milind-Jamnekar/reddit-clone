@@ -1,16 +1,11 @@
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Flex, Icon } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { BiPoll } from "react-icons/bi";
-import {
-  IoDocumentText,
-  IoDocumentTextOutline,
-  IoImageOutline,
-} from "react-icons/io5";
-import TabItem from "./TabItem";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import TextInputs from "./TextInputs";
+import { BsLink45Deg, BsMic } from "react-icons/bs";
+import { IoDocumentTextOutline, IoImageOutline } from "react-icons/io5";
 import ImageUpload from "./ImageUpload";
+import TabItem from "./TabItem";
+import TextInputs from "./TextInputs";
 
 interface INewPostFormProps {}
 

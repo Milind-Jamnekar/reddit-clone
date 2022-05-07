@@ -15,11 +15,17 @@ const ImageUpload: React.FunctionComponent<IImageUploadProps> = ({
   selectedFile,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   return (
     <Flex direction={"column"} justify="center" align="center" width="100%">
       {selectedFile ? (
         <>
-          <Image src={selectedFile} maxW="400px" maxHeight="400px" />
+          <Image
+            src={selectedFile}
+            maxW="400px"
+            maxHeight="400px"
+            alt={`your uploaded image`}
+          />
           <Stack direction="row" mt="20px">
             <Button height="28px" onClick={() => setSelectedTab("Post")}>
               Back to post
