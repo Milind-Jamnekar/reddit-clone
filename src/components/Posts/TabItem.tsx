@@ -41,4 +41,4 @@ const TabItem: React.FunctionComponent<ITabItemProps> = ({
   );
 };
 
-export default TabItem;
+export default React.memo(TabItem);
