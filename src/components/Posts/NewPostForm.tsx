@@ -1,5 +1,5 @@
 import { Flex, Icon, Text } from "@chakra-ui/react";
-import * as React from "react";
+import React, { useState } from "react";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { BiPoll } from "react-icons/bi";
 import {
@@ -10,6 +10,7 @@ import {
 import TabItem from "./TabItem";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import TextInputs from "./TextInputs";
+import ImageUpload from "./ImageUpload";
 
 interface INewPostFormProps {}
 
@@ -27,16 +28,33 @@ export type TabItem = {
 };
 
 const NewPostForm: React.FC<INewPostFormProps> = (props) => {
-  const [textInputs, setTextInputs] = React.useState({
+  // Text Input
+  const [textInputs, setTextInputs] = useState({
     title: "",
     body: "",
   });
-  const [selectedTab, setSelectedTab] = React.useState(formTabs[0].title);
+  // file input
+  const [selectedFile, setSelectedFile] = useState<string>("");
+  const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
 
   const handleCreatePost = async () => {};
 
-  const onSelectedImage = () => {};
+  // handler for image change
+  const onSelectedImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
 
+    if (e.target.files?.[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      if (readerEvent.target?.result) {
+        setSelectedFile(readerEvent.target.result as string);
+      }
+    };
+  };
+
+  // handler for text form change
   const onTextChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -51,6 +69,7 @@ const NewPostForm: React.FC<INewPostFormProps> = (props) => {
   };
   return (
     <Flex direction="column" bg="white" borderRadius="4" mt="2">
+      {/* Tabs  */}
       <Flex width="100%">
         {formTabs.map((item) => (
           <TabItem
@@ -80,16 +99,24 @@ const NewPostForm: React.FC<INewPostFormProps> = (props) => {
           </TabList>
         </Tabs> */}
       </Flex>
+
+      {/* Form  */}
       <Flex p={4}>
-        {selectedTab === "Post" ? (
+        {selectedTab === "Post" && (
           <TextInputs
             textInputs={textInputs}
             handleCreatePost={handleCreatePost}
             onChange={onTextChange}
             loading={false}
           />
-        ) : (
-          <></>
+        )}
+        {selectedTab === "Images & Video" && (
+          <ImageUpload
+            selectedFile={selectedFile}
+            setSelectedTab={setSelectedTab}
+            setSelectedFile={setSelectedFile}
+            onSelectedImage={onSelectedImage}
+          />
         )}
       </Flex>
     </Flex>
