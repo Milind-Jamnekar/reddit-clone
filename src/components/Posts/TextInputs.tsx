@@ -18,6 +18,7 @@ const TextInputs: React.FunctionComponent<ITextInputsProps> = ({
   textInputs,
   onChange,
   handleCreatePost,
+  loading,
 }) => {
   return (
     <Stack width="100%" spacing="3">
@@ -58,6 +59,7 @@ const TextInputs: React.FunctionComponent<ITextInputsProps> = ({
           p="0px 30px"
           disabled={!textInputs.title}
           onClick={handleCreatePost}
+          isLoading={loading}
         >
           Post
         </Button>
