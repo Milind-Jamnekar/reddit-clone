@@ -8,30 +8,15 @@ export interface IPageContentProps {
 
 export default function PageContent({ children }: IPageContentProps) {
   return (
-    <Flex justify="center" p="16px 0px" border="1px solid red">
-      <Flex
-        width="95%"
-        maxWidth="860px"
-        justify="center"
-        border="1px solid green"
-      >
+    <Flex justify="center" p="16px 0px">
+      <Flex width="95%" maxWidth="860px" justify="center">
         {/* Left hand side  */}
-        <Flex
-          direction="column"
-          width={["100%", "65%"]}
-          border="2px solid yellow"
-          mr={[0, 6]}
-        >
+        <Flex direction="column" width={["100%", "65%"]} mr={[0, 6]}>
           {" "}
           {children && children[0 as keyof typeof children]}
         </Flex>
         {/* Right hande side  */}
-        <Flex
-          direction="column"
-          display={["none", "flex"]}
-          flexGrow={1}
-          border="1px solid orange"
-        >
+        <Flex direction="column" display={["none", "flex"]} flexGrow={1}>
           {children && children[1 as keyof typeof children]}
         </Flex>
       </Flex>
