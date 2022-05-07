@@ -6,6 +6,7 @@ import safeJsonStringify from "safe-json-stringify";
 import { NotFound } from "../../../components/Modal/Community/NotFound";
 import Header from "../../../components/Communtiy/Header";
 import PageContent from "../../../components/Layout/PageContent";
+import CreatePostLink from "../../../components/Communtiy/CreatePostLink";
 
 type CommunityPageProps = {
   data: Community;
@@ -19,7 +20,9 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
     <>
       <Header communityData={data} />
       <PageContent>
-        <>LHS</>
+        <>
+          <CreatePostLink />
+        </>
         <>RHS</>
       </PageContent>
     </>
