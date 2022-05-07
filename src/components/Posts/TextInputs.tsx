@@ -56,7 +56,7 @@ const TextInputs: React.FunctionComponent<ITextInputsProps> = ({
         <Button
           height="34px"
           p="0px 30px"
-          disabled={false}
+          disabled={!textInputs.title}
           onClick={handleCreatePost}
         >
           Post
