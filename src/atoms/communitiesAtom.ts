@@ -13,7 +13,7 @@ export interface Community {
 export interface CommunitySnippet {
   communityId: string;
   isMod: boolean;
-  profileImageURL: string;
+  communityImageURL: string;
 }
 
 interface CommunityState {
