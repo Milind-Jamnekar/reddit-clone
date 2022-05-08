@@ -1,4 +1,11 @@
-import { Flex, Icon } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Flex,
+  Icon,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -47,7 +54,9 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  //handler for creating post in database
   const handleCreatePost = async () => {
     const { communityId } = router.query;
     //New Post
@@ -63,28 +72,29 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     };
     setLoading(true);
     try {
+      // Create the post in db
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
 
+      // Check for selectedFile
       if (selectedFile) {
+        //store in storage => getDowloadURL (returrs url)
         const imageRef = ref(storage, `posts/${postDocRef.id}/image`);
         await uploadString(imageRef, selectedFile, "data_url");
         const dowloadURL = await getDownloadURL(imageRef);
 
+        // update post doc by adding imageURL
         await updateDoc(postDocRef, {
           imageURL: dowloadURL,
         });
       }
     } catch (error: any) {
       console.log("handle CreatePost error", error.message);
+      setError(error.message);
     }
     setLoading(false);
-    // Create the post in db
-    // Check for selectedFile
-    //store in storage => getDowloadURL (returrs url)
-    // update post doc by adding imageURL
-    // redirect the user back to the communityPage using the router
 
-    // router.back()
+    // redirect the user back to the communityPage using the router
+    router.back();
   };
 
   // handler for image change
@@ -115,6 +125,7 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
       [name]: value,
     }));
   };
+
   return (
     <Flex direction="column" bg="white" borderRadius="4" mt="2">
       {/* Tabs  */}
@@ -167,6 +178,13 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
           />
         )}
       </Flex>
+      {error && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>Your browser is outdated!</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
     </Flex>
   );
 };
