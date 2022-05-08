@@ -1,12 +1,13 @@
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext, NextPage } from "next";
-import { Community } from "../../../atoms/communitiesAtom";
-import { firestore } from "../../../firebase/clientApp";
 import safeJsonStringify from "safe-json-stringify";
-import { NotFound } from "../../../components/Modal/Community/NotFound";
+import { Community } from "../../../atoms/communitiesAtom";
+import CreatePostLink from "../../../components/Communtiy/CreatePostLink";
 import Header from "../../../components/Communtiy/Header";
 import PageContent from "../../../components/Layout/PageContent";
-import CreatePostLink from "../../../components/Communtiy/CreatePostLink";
+import { NotFound } from "../../../components/Modal/Community/NotFound";
+import Posts from "../../../components/Posts/Posts";
+import { firestore } from "../../../firebase/clientApp";
 
 type CommunityPageProps = {
   data: Community;
@@ -22,6 +23,7 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
       <PageContent>
         <>
           <CreatePostLink />
+          <Posts communityData={data}></Posts>
         </>
         <>RHS</>
       </PageContent>
