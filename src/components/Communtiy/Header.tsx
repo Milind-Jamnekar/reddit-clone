@@ -23,7 +23,7 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
           {communityData.bgImageURL ? (
             <Image
               src={communityData.bgImageURL}
-              objectFit="contain"
+              objectFit="cover"
               width="100%"
               alt={`r${communityData.id} background image`}
             />
