@@ -15,16 +15,16 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { firestore, storage } from "./../../firebase/clientApp";
+import { firestore, storage } from "../../firebase/clientApp";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentTextOutline, IoImageOutline } from "react-icons/io5";
 import { Post } from "../../atoms/postsAtom";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "./PostForm/ImageUpload";
 import TabItem from "./TabItem";
-import TextInputs from "./TextInputs";
+import TextInputs from "./PostForm/TextInputs";
 
 interface INewPostFormProps {
   user: User;
