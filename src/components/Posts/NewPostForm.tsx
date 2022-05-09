@@ -97,21 +97,6 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     router.back();
   };
 
-  // handler for image change
-  const onSelectedImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-
-    if (e.target.files?.[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-    }
-
-    reader.onload = (readerEvent) => {
-      if (readerEvent.target?.result) {
-        setSelectedFile(readerEvent.target.result as string);
-      }
-    };
-  };
-
   // handler for text form change
   const onTextChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
