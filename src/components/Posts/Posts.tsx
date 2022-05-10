@@ -1,5 +1,6 @@
 import { Skeleton, Stack } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Community } from "../../atoms/communitiesAtom";
@@ -56,17 +57,19 @@ const Posts: React.FunctionComponent<IPostsProps> = ({ communityData }) => {
         <Loading />
       ) : (
         <Stack>
-          {postStateValue.posts.map((post) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              userIsCreator={user?.uid === post.creatorId}
-              userVoteStatus={undefined}
-              onVote={onVote}
-              onSelectPost={onSelectPost}
-              onDeletePost={onDeletePost}
-            />
-          ))}
+          <AnimatePresence initial={true}>
+            {postStateValue.posts.map((post) => (
+              <PostItem
+                key={post.id}
+                post={post}
+                userIsCreator={user?.uid === post.creatorId}
+                userVoteStatus={undefined}
+                onVote={onVote}
+                onSelectPost={onSelectPost}
+                onDeletePost={onDeletePost}
+              />
+            ))}
+          </AnimatePresence>
         </Stack>
       )}
     </>
