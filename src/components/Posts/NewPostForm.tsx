@@ -25,6 +25,7 @@ import { Post } from "../../atoms/postsAtom";
 import ImageUpload from "./PostForm/ImageUpload";
 import TabItem from "./TabItem";
 import TextInputs from "./PostForm/TextInputs";
+import useSelectFile from "../../hooks/useSelectFile";
 
 interface INewPostFormProps {
   user: User;
@@ -51,7 +52,8 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     body: "",
   });
   // file input
-  const [selectedFile, setSelectedFile] = useState<string>("");
+  // const [selectedFile, setSelectedFile] = useState<string>("");
+  const { selectedFile, setSelectedFile, onSelectedImage } = useSelectFile();
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -91,10 +93,10 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
       console.log("handle CreatePost error", error.message);
       setError(error.message);
     }
-    setLoading(false);
 
     // redirect the user back to the communityPage using the router
     router.back();
+    setLoading(false);
   };
 
   // handler for text form change
@@ -166,7 +168,7 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
       {error && (
         <Alert status="error">
           <AlertIcon />
-          <AlertTitle>Your browser is outdated!</AlertTitle>
+          <AlertTitle>Error while creating post!</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
