@@ -32,9 +32,9 @@ const Header: React.FC<IHeaderProps> = ({ communityData }) => {
         <Flex justify="center" bg="white" flexGrow={1}>
           {/* Community Image  */}
           <Flex width="95%" maxWidth="860px" gap={2}>
-            {communityData.profileImageURL ? (
+            {communityStateValue.currentCommunity?.profileImageURL ? (
               <Image
-                src={communityData.profileImageURL}
+                src={communityStateValue.currentCommunity?.profileImageURL}
                 width="72px"
                 height="72px"
                 margin="-20px 0px 0px"
