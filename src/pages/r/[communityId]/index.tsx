@@ -1,7 +1,10 @@
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext, NextPage } from "next";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import safeJsonStringify from "safe-json-stringify";
-import { Community } from "../../../atoms/communitiesAtom";
+import { Community, CommunityState } from "../../../atoms/communitiesAtom";
+import About from "../../../components/Communtiy/About";
 import CreatePostLink from "../../../components/Communtiy/CreatePostLink";
 import Header from "../../../components/Communtiy/Header";
 import PageContent from "../../../components/Layout/PageContent";
@@ -14,9 +17,19 @@ type CommunityPageProps = {
 };
 
 const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
+  const setCommunityData = useSetRecoilState(CommunityState);
+
+  useEffect(() => {
+    setCommunityData((prev) => ({
+      ...prev,
+      currentCommunity: data,
+    }));
+  }, []);
+
   if (!data) {
     return <NotFound />;
   }
+
   return (
     <>
       <Header communityData={data} />
@@ -25,7 +38,7 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
           <CreatePostLink />
           <Posts communityData={data}></Posts>
         </>
-        <>RHS</>
+        <About communityData={data} />
       </PageContent>
     </>
   );
