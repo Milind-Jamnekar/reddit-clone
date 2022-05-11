@@ -29,8 +29,8 @@ import { Post } from "../../atoms/postsAtom";
 interface IPostItemProps {
   post: Post;
   userIsCreator: boolean;
-  userVoteStatus?: number;
-  onVote: () => {};
+  userVoteValue?: number;
+  onVote: (post: Post, vote: number, communityId: string) => void;
   onSelectPost: () => void;
   onDeletePost: (post: Post) => Promise<boolean>;
 }
@@ -38,7 +38,7 @@ interface IPostItemProps {
 const PostItem: React.FunctionComponent<IPostItemProps> = ({
   post,
   userIsCreator,
-  userVoteStatus,
+  userVoteValue,
   onDeletePost,
   onSelectPost,
   onVote,
@@ -93,9 +93,9 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       >
         <Icon
           as={
-            userVoteStatus === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
+            userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
-          color={userVoteStatus === 1 ? "brand.100" : ""}
+          color={userVoteValue === 1 ? "brand.100" : "gray.400"}
           fontSize={22}
           onClick={onVote}
           cursor={"pointer"}
@@ -103,11 +103,11 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
         <Text fontSize={"9pt"}>{post.voteStatus}</Text>
         <Icon
           as={
-            userVoteStatus === 1
+            userVoteValue === -1
               ? IoArrowDownCircleSharp
               : IoArrowDownCircleOutline
           }
-          color={userVoteStatus === 1 ? "brand.100" : ""}
+          color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
           fontSize={22}
           onClick={onVote}
           cursor={"pointer"}
