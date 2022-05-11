@@ -62,6 +62,13 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
     }
   };
 
+  // 1000 karma convert to 1k
+  function kFormatter(num: number) {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+      : Math.sign(num) * Math.abs(num);
+  }
+
   const variant = {
     hidden: { x: 20, opacity: 0 },
     visible: { x: 0, opacity: 1 },
@@ -101,7 +108,9 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           onClick={() => onVote(post, 1, post.communityId)}
           cursor={"pointer"}
         />
-        <Text fontSize={"9pt"}>{post.voteStatus}</Text>
+        <Text fontSize={"10pt"} fontWeight={700}>
+          {kFormatter(post.voteStatus)}
+        </Text>
         <Icon
           as={
             userVoteValue === -1
