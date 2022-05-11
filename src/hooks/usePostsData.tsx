@@ -11,18 +11,24 @@ import { deleteObject, ref } from "firebase/storage";
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { authModalState } from "../atoms/authModalAtom";
 import { CommunityState } from "../atoms/communitiesAtom";
 import { Post, postState, PostVote } from "../atoms/postsAtom";
 import { auth, firestore, storage } from "../firebase/clientApp";
 
 const usePostsData = () => {
   const [user] = useAuthState(auth);
+  const setAuthModalState = useSetRecoilState(authModalState);
   const [postStateValue, setPostStateValue] = useRecoilState(postState);
   const currentCommunity = useRecoilValue(CommunityState).currentCommunity;
 
   const onVote = async (post: Post, vote: number, communityId: string) => {
     // check user if not => auth modal
+    if (!user) {
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
     try {
       const { voteStatus } = post;
       const existingVote = postStateValue.postVotes.find(
@@ -72,27 +78,28 @@ const usePostsData = () => {
           // delete the postVote document
           batch.delete(postVoteRef);
 
-          voteChange += -1;
+          voteChange *= -1;
         }
         // Flipping the vote ( up => down or down => up)
         else {
           // add/sub 2 to/from post.voteStatus
+          voteChange = 2 * vote;
           updatedPost.voteStatus = voteStatus + 2 * vote;
 
           const voteIdx = postStateValue.postVotes.findIndex(
             (vote) => vote.id === existingVote.id
           );
 
-          updatedPostVotes[voteIdx] = {
-            ...existingVote,
-            voteValue: vote,
-          };
+          if (voteIdx !== -1) {
+            updatedPostVotes[voteIdx] = {
+              ...existingVote,
+              voteValue: vote,
+            };
+          }
           // update exising postVote document
           batch.update(postVoteRef, {
             voteValue: vote,
           });
-
-          voteChange = 2 * vote;
         }
       }
       //update our post document
@@ -107,7 +114,6 @@ const usePostsData = () => {
       }));
       const postRef = doc(firestore, "posts", post.id);
       batch.update(postRef, { voteStatus: voteStatus + voteChange });
-
       await batch.commit();
       //Update state with updated version
     } catch (error: any) {
