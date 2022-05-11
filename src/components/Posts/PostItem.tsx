@@ -31,7 +31,7 @@ interface IPostItemProps {
   userIsCreator: boolean;
   userVoteValue?: number;
   onVote: (post: Post, vote: number, communityId: string) => void;
-  onSelectPost: () => void;
+  onSelectPost?: (post: Post) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
 }
 
@@ -83,7 +83,6 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       borderRadius={4}
       _hover={{ borderColor: "gray.500" }}
       cursor="pointer"
-      onClick={onSelectPost}
       animate="visible"
       initial="hidden"
       exit="exit"
@@ -124,7 +123,11 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       </Flex>
 
       {/* Post Content  */}
-      <Flex direction="column" width="100%">
+      <Flex
+        direction="column"
+        width="100%"
+        onClick={() => onSelectPost && onSelectPost(post)}
+      >
         <Flex direction="column" p="10px">
           {/* User Info  */}
           <HStack>
