@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import moment from "moment";
-import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
