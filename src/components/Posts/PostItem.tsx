@@ -33,6 +33,7 @@ interface IPostItemProps {
   onVote: (post: Post, vote: number, communityId: string) => void;
   onSelectPost?: (post: Post) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
+  event: React.MouseEvent<HTMLDivElement | MouseEvent>;
 }
 
 const PostItem: React.FunctionComponent<IPostItemProps> = ({
@@ -46,6 +47,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   const [error, setError] = useState("");
   const [loadingImage, setLoadinImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const singlePostPage = !onSelectPost;
 
   const handlePostDelete = async () => {
     setLoadingDelete(true);
@@ -69,8 +71,8 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   }
 
   const variant = {
-    hidden: { x: 20, opacity: 0 },
-    visible: { x: 0, opacity: 1 },
+    initial: { x: 20, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
     exit: { x: -20, opacity: 0 },
   };
 
@@ -79,23 +81,20 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       as={motion.div}
       border="1px solid"
       bg="white"
-      borderColor="gray.300"
-      borderRadius={4}
-      _hover={{ borderColor: "gray.500" }}
-      cursor="pointer"
-      animate="visible"
-      initial="hidden"
-      exit="exit"
+      borderColor={singlePostPage ? "white" : "gray.300"}
+      borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
+      _hover={{ borderColor: singlePostPage ? "white" : "gray.500" }}
+      cursor={singlePostPage ? "unset" : "pointer"}
       variants={variant}
     >
       {/* Voting section  */}
       <Flex
         direction={"column"}
         align="center"
-        bg="gray.100"
+        bg={singlePostPage ? "none" : "gray.100"}
         p={2}
         width="40px"
-        borderRadius={4}
+        borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
       >
         <Icon
           as={
@@ -103,7 +102,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           }
           color={userVoteValue === 1 ? "brand.100" : "gray.400"}
           fontSize={22}
-          onClick={() => onVote(post, 1, post.communityId)}
+          onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor={"pointer"}
         />
         <Text fontSize={"10pt"} fontWeight={700}>
@@ -117,7 +116,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           }
           color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
           fontSize={22}
-          onClick={() => onVote(post, -1, post.communityId)}
+          onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor={"pointer"}
         />
       </Flex>
