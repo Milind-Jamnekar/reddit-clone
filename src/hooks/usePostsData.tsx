@@ -25,7 +25,13 @@ const usePostsData = () => {
   const [postStateValue, setPostStateValue] = useRecoilState(postState);
   const currentCommunity = useRecoilValue(CommunityState).currentCommunity;
 
-  const onVote = async (post: Post, vote: number, communityId: string) => {
+  const onVote = async (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    post: Post,
+    vote: number,
+    communityId: string
+  ) => {
+    event.stopPropagation();
     // check user if not => auth modal
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
@@ -114,6 +120,14 @@ const usePostsData = () => {
         posts: updatedPosts,
         postVotes: updatedPostVotes,
       }));
+
+      //If you are on selectePost Page, include selectPost prop as well
+      if (postStateValue.selectedPost) {
+        setPostStateValue((prev) => ({
+          ...prev,
+          selectedPost: updatedPost,
+        }));
+      }
       const postRef = doc(firestore, "posts", post.id);
       batch.update(postRef, { voteStatus: voteStatus + voteChange });
       await batch.commit();
