@@ -138,7 +138,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           </HStack>
 
           {/* Post title  */}
-          <Text fontSize="14pt" fontWeight={600}>
+          <Text fontSize={["17pt", "14pt"]} fontWeight={600}>
             {post.title}
           </Text>
 
