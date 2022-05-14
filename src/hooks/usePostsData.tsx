@@ -26,7 +26,7 @@ const usePostsData = () => {
   const currentCommunity = useRecoilValue(CommunityState).currentCommunity;
 
   const onVote = async (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    event: React.MouseEvent<SVGElement | MouseEvent>,
     post: Post,
     vote: number,
     communityId: string
