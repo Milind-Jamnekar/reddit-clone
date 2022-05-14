@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import moment from "moment";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
@@ -30,10 +31,14 @@ interface IPostItemProps {
   post: Post;
   userIsCreator: boolean;
   userVoteValue?: number;
-  onVote: (post: Post, vote: number, communityId: string) => void;
+  onVote: (
+    event: React.MouseEvent<SVGElement | MouseEvent>,
+    post: Post,
+    vote: number,
+    communityId: string
+  ) => void;
   onSelectPost?: (post: Post) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
-  event: React.MouseEvent<HTMLDivElement | MouseEvent>;
 }
 
 const PostItem: React.FunctionComponent<IPostItemProps> = ({
@@ -48,8 +53,12 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   const [loadingImage, setLoadinImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const singlePostPage = !onSelectPost;
+  const router = useRouter();
 
-  const handlePostDelete = async () => {
+  const handlePostDelete = async (
+    event: React.MouseEvent<HTMLDivElement | MouseEvent>
+  ) => {
+    event.stopPropagation();
     setLoadingDelete(true);
     try {
       const success = await onDeletePost(post);
@@ -57,10 +66,14 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       if (!success) {
         throw new Error("Failed to delete post! 😨");
       }
-      setLoadingDelete(false);
+
+      if (singlePostPage) {
+        router.push(`r/${post.communityId}/`);
+      }
     } catch (error: any) {
       setError(error.message);
     }
+    setLoadingDelete(false);
   };
 
   // 1000 karma convert to 1k
@@ -85,6 +98,9 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
       borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
       _hover={{ borderColor: singlePostPage ? "white" : "gray.500" }}
       cursor={singlePostPage ? "unset" : "pointer"}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       variants={variant}
     >
       {/* Voting section  */}
@@ -93,19 +109,20 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
         align="center"
         bg={singlePostPage ? "none" : "gray.100"}
         p={2}
-        width="40px"
+        width={["50px", "40px"]}
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
+        gap={[1, null]}
       >
         <Icon
           as={
             userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
           color={userVoteValue === 1 ? "brand.100" : "gray.400"}
-          fontSize={22}
+          fontSize={[35, 22]}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor={"pointer"}
         />
-        <Text fontSize={"10pt"} fontWeight={700}>
+        <Text fontSize={["13pt", "10pt"]} fontWeight={700}>
           {kFormatter(post.voteStatus)}
         </Text>
         <Icon
@@ -115,7 +132,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
               : IoArrowDownCircleOutline
           }
           color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
-          fontSize={22}
+          fontSize={[35, 22]}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor={"pointer"}
         />
@@ -143,7 +160,12 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           </Text>
 
           {/* Post Body  */}
-          <Text mt={2} fontSize="10pt" noOfLines={[4, 6, 10]}>
+          <Text
+            mt={2}
+            fontSize={["13pt", "10pt"]}
+            onClick={() => setIsBodyTextVisible(isBodyTextVisible)}
+            noOfLines={[4, 2, 5]}
+          >
             {post.body}
           </Text>
 
