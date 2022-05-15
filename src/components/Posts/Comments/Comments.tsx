@@ -1,12 +1,24 @@
-import { Box, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import {
   collection,
   doc,
   increment,
+  orderBy,
+  query,
   serverTimestamp,
   Timestamp,
+  where,
   writeBatch,
+  getDocs,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -14,6 +26,7 @@ import { Post } from "../../../atoms/postsAtom";
 import { firestore } from "../../../firebase/clientApp";
 import CommentInput from "./CommentInput";
 import { postState } from "../../../atoms/postsAtom";
+import CommentItem from "./CommentItem";
 
 interface ICommentsProps {
   user: User;
@@ -62,6 +75,8 @@ const Comments: React.FC<ICommentsProps> = ({
       };
 
       batch.set(commentDocRef, comment);
+
+      comment.createdAt = { seconds: Date.now() / 1000 } as Timestamp;
       //update comment count on post + 1
       const postDocRef = doc(firestore, "posts", selectedPost?.id!);
       batch.update(postDocRef, { numberOfComments: increment(1) });
@@ -89,11 +104,28 @@ const Comments: React.FC<ICommentsProps> = ({
     //update comment count on post + 1
     //update client recoil state
   };
-  const getPostComments = async () => {};
+  const getPostComments = async () => {
+    try {
+      const commentQuery = query(
+        collection(firestore, "comments"),
+        where("postId", "==", selectedPost?.id),
+        orderBy("createdAt", "desc")
+      );
+      const commentsDocs = await getDocs(commentQuery);
+      const comments = commentsDocs.docs.map((comment) => ({
+        id: comment.id,
+        ...comment.data(),
+      }));
+      setComments(comments as Comment[]);
+    } catch (error: any) {
+      console.log("getPostError", error.message);
+    }
+  };
 
   useEffect(() => {
+    if (!selectedPost) return;
     getPostComments();
-  }, []);
+  }, [selectedPost]);
 
   return (
     <Box bg="white" borderRadius="0px 0px 4px 4px" p={2}>
@@ -113,6 +145,48 @@ const Comments: React.FC<ICommentsProps> = ({
           loading={createLoading}
         />
       </Flex>
+      <Stack spacing={6} p={2}>
+        {fetchLoading ? (
+          <>
+            {[0, 1, 2].map((item) => (
+              <Box key={item} padding="6" bg="white">
+                <SkeletonCircle />
+                <SkeletonText mt={3} noOfLines={2} spacing={4} />
+              </Box>
+            ))}
+          </>
+        ) : (
+          <>
+            {comments.length === 0 ? (
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                borderTop="1px solid"
+                borderColor="gray.100"
+                p={20}
+              >
+                <Text fontWeight="700" opacity={0.3}>
+                  No comments yet! 😴
+                </Text>
+              </Flex>
+            ) : (
+              <>
+                {" "}
+                {comments.map((comment) => (
+                  <CommentItem
+                    key={comment.id}
+                    comment={comment}
+                    onDeleteComment={onDeleteComment}
+                    loadingDelete={false}
+                    userId={user.uid}
+                  />
+                ))}
+              </>
+            )}
+          </>
+        )}
+      </Stack>
     </Box>
   );
 };
