@@ -1,6 +1,6 @@
-import { Box, Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import {
   IoArrowDownCircleOutline,
@@ -11,6 +11,7 @@ import { Comment } from "./Comments";
 interface CommentItemProps {
   comment: Comment;
   onDeleteComment: (comment: Comment) => void;
+  onUpdateComment: (commentId: string, commentText: string) => void;
   loadingDelete: boolean;
   userId: string;
 }
@@ -18,9 +19,13 @@ interface CommentItemProps {
 const CommentItem: React.FC<CommentItemProps> = ({
   userId,
   onDeleteComment,
+  onUpdateComment,
   loadingDelete,
   comment,
 }) => {
+  const [editInput, setEditInput] = useState(false);
+  const [editText, setEditText] = useState(comment.text);
+
   return (
     <Flex>
       <Box mr={2}>
@@ -33,7 +38,14 @@ const CommentItem: React.FC<CommentItemProps> = ({
             {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
         </Stack>
-        <Text fontSize="10pt">{comment.text}</Text>
+        {editInput ? (
+          <Input
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+          />
+        ) : (
+          <Text fontSize="10pt">{comment.text}</Text>
+        )}
         <Stack
           direction="row"
           align="center "
@@ -42,20 +54,58 @@ const CommentItem: React.FC<CommentItemProps> = ({
         >
           <Icon as={IoArrowUpCircleOutline} />
           <Icon as={IoArrowDownCircleOutline} />
-          {userId === comment.creatorId && (
-            <>
-              <Text fontSize="9pt" _hover={{ color: "blue.500" }}>
-                Edit
-              </Text>
-              <Text
-                fontSize="9pt"
-                _hover={{ color: "blue.500" }}
-                onClick={() => onDeleteComment(comment)}
-              >
-                Delete
-              </Text>
-            </>
-          )}
+          {userId === comment.creatorId &&
+            (editInput ? (
+              <>
+                <Button
+                  fontSize="9pt"
+                  bg="white"
+                  p="0"
+                  color="gray.400"
+                  onClick={() => {
+                    onUpdateComment(comment.id, editText);
+                    setEditInput(false);
+                  }}
+                  _hover={{ color: "blue.600", bg: "blue:100" }}
+                >
+                  Save
+                </Button>
+                <Button
+                  fontSize="9pt"
+                  bg="white"
+                  p="0"
+                  color="gray.400"
+                  onClick={() => setEditInput(false)}
+                  _hover={{ color: "blue.600", bg: "blue:100" }}
+                >
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  fontSize="9pt"
+                  bg="white"
+                  p="0"
+                  color="gray.400"
+                  onClick={() => setEditInput(true)}
+                  _hover={{ color: "blue.600", bg: "blue:100" }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  fontSize="9pt"
+                  isLoading={loadingDelete}
+                  bg="white"
+                  p="1"
+                  color="gray.400"
+                  _hover={{ color: "red.300" }}
+                  onClick={() => onDeleteComment(comment)}
+                >
+                  Delete
+                </Button>
+              </>
+            ))}
         </Stack>
       </Stack>
     </Flex>
