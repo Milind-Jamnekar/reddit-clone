@@ -19,6 +19,7 @@ import {
   where,
   writeBatch,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -55,6 +56,7 @@ const Comments: React.FC<ICommentsProps> = ({
   const [fetchLoading, setFetchLoading] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
   const setPostState = useSetRecoilState(postState);
+  const [loadingDelete, setLoadingDelete] = useState("");
 
   const onCreateComment = async (commentText: string) => {
     setCreateLoading(true);
@@ -99,10 +101,58 @@ const Comments: React.FC<ICommentsProps> = ({
 
     setCreateLoading(false);
   };
-  const onDeleteComment = async (comment: any) => {
-    //Create comment document
-    //update comment count on post + 1
-    //update client recoil state
+
+  const onDeleteComment = async (comment: Comment) => {
+    setLoadingDelete(comment.id);
+    try {
+      //delete comment from document
+      const batch = writeBatch(firestore);
+      const commentDocRef = doc(firestore, "comments", comment.id);
+      batch.delete(commentDocRef);
+      //update comment count on post  -1
+      const postDocRef = doc(firestore, "posts", comment.postId);
+      batch.update(postDocRef, {
+        noOfComments: increment(-1),
+      });
+
+      // commit all changes
+      await batch.commit();
+
+      //update client recoil state
+      setPostState((prev) => ({
+        ...prev,
+        selectedPost: {
+          ...prev.selectedPost,
+          numberOfComments: prev.selectedPost?.numberOfComments! - 1,
+        } as Post,
+      }));
+
+      // Update local component state
+      setComments((prev) => prev.filter((item) => item.id !== comment.id));
+    } catch (error: any) {
+      console.error("onDeleteComment error", error.message);
+    }
+    setLoadingDelete("");
+  };
+
+  const onUpdateComment = async (commentId: string, newText: string) => {
+    //Update on document
+    try {
+      const commentDocRef = doc(firestore, "comments", commentId);
+      updateDoc(commentDocRef, {
+        text: newText,
+      });
+
+      setComments((prev) =>
+        prev.map((comment) => {
+          if (comment.id === commentId) comment.text = newText;
+          return comment;
+        })
+      );
+    } catch (error: any) {
+      console.error("handle updateComment", error.message);
+    }
+    //Update on local state
   };
   const getPostComments = async () => {
     try {
@@ -178,7 +228,8 @@ const Comments: React.FC<ICommentsProps> = ({
                     key={comment.id}
                     comment={comment}
                     onDeleteComment={onDeleteComment}
-                    loadingDelete={false}
+                    onUpdateComment={onUpdateComment}
+                    loadingDelete={comment.id === loadingDelete}
                     userId={user.uid}
                   />
                 ))}
