@@ -160,12 +160,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           </Text>
 
           {/* Post Body  */}
-          <Text
-            mt={2}
-            fontSize={["13pt", "10pt"]}
-            onClick={() => setIsBodyTextVisible(isBodyTextVisible)}
-            noOfLines={[4, 2, 5]}
-          >
+          <Text mt={2} fontSize={["13pt", "10pt"]} noOfLines={[4, 2, 5]}>
             {post.body}
           </Text>
 
