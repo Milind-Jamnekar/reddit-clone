@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Skeleton,
   SkeletonCircle,
   SkeletonText,
   Stack,
@@ -11,22 +10,21 @@ import { User } from "firebase/auth";
 import {
   collection,
   doc,
+  getDocs,
   increment,
   orderBy,
   query,
   serverTimestamp,
   Timestamp,
+  updateDoc,
   where,
   writeBatch,
-  getDocs,
-  updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { Post } from "../../../atoms/postsAtom";
+import { Post, postState } from "../../../atoms/postsAtom";
 import { firestore } from "../../../firebase/clientApp";
 import CommentInput from "./CommentInput";
-import { postState } from "../../../atoms/postsAtom";
 import CommentItem from "./CommentItem";
 
 interface ICommentsProps {
