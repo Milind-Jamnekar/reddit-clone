@@ -23,6 +23,7 @@ export const Directory: React.FC = () => {
         padding="3px 6px"
         borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        onClick={toggleMenuOpen}
       >
         <HStack
           justifyContent="space-between"
