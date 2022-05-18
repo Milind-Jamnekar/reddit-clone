@@ -23,7 +23,9 @@ const MenuListItem: React.FC<IMenuListItemProps> = ({
       width="100%"
       fontSize="10pt"
       _hover={{ bg: "gray.100" }}
-      onClick={() => {}}
+      onClick={() =>
+        onSelectMenuItem({ displayText, link, icon, imageURL, iconColor })
+      }
     >
       <Flex align="center">
         {imageURL ? (
