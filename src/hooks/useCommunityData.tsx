@@ -73,7 +73,7 @@ export const useCommunityData = () => {
       ///Adding communitySnippet in user db
       const newSnippet: CommunitySnippet = {
         communityId: communityData.id,
-        isMod: false,
+        isMod: user?.uid === communityData.creatorId,
         profileImageURL: communityData.profileImageURL || "",
       };
 
