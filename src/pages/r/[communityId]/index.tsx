@@ -24,7 +24,7 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ data }) => {
       ...prev,
       currentCommunity: data,
     }));
-  }, []);
+  }, [data, setCommunityData]);
 
   if (!data) {
     return <NotFound />;
