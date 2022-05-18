@@ -17,6 +17,7 @@ const MenuListItem: React.FC<IMenuListItemProps> = ({
   icon,
   displayText,
 }) => {
+  const { onSelectMenuItem } = useDirectory();
   return (
     <MenuItem
       width="100%"
