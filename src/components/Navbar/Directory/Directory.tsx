@@ -14,7 +14,7 @@ import { Communities } from "./Communitites";
 
 export const Directory: React.FC = () => {
   return (
-    <Menu>
+    <Menu isOpen={directoryState.isOpen}>
       <MenuButton
         cursor="pointer"
         padding="3px 6px"
