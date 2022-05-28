@@ -76,7 +76,18 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     setLoading(true);
     try {
       // Create the post in db
-      const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
+      const postDocRef = await addDoc(collection(firestore, "posts"), {
+        communityId,
+        // communityImageURL: communityImageURL || "",
+        creatorId: user.uid,
+        userDisplayText: user.email!.split("@")[0],
+        title,
+        body,
+        numberOfComments: 0,
+        voteStatus: 0,
+        createdAt: serverTimestamp(),
+        editedAt: serverTimestamp(),
+      });
 
       // Check for selectedFile
       if (selectedFile) {
