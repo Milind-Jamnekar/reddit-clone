@@ -21,10 +21,9 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { Post, postState } from "../../../atoms/postsAtom";
-import { auth, firestore } from "../../../firebase/clientApp";
+import { firestore } from "../../../firebase/clientApp";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
