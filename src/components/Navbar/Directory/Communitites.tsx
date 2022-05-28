@@ -41,8 +41,9 @@ export const Communities: React.FC = () => {
           gap={2}
           alignContent="center"
           onClick={() => setOpen(true)}
+          p={2}
         >
-          <Icon as={GrAdd} fontSize={20} />
+          <Icon ml={3} as={GrAdd} fontSize={20} />
           <Text fontSize="11pt">Communitites</Text>
         </MenuItem>
         {snippets.map((snippet) => (
