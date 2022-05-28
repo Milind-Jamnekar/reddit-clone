@@ -14,7 +14,7 @@ export const Communities: React.FC = () => {
     <>
       <CreateCommunityModal open={isOpen} handleClose={() => setOpen(false)} />
       <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.6 00">
+        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.600">
           Moderating
         </Text>
         {snippets
@@ -31,7 +31,7 @@ export const Communities: React.FC = () => {
           ))}
       </Box>
       <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.6 00">
+        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.600">
           MY Communities
         </Text>
         <MenuItem
