@@ -15,7 +15,7 @@ interface DirectoryMenuState {
   selectedMenuItem: DirectoryMenuItem;
 }
 
-const defaultMenuItem: DirectoryMenuItem = {
+export const defaultMenuItem: DirectoryMenuItem = {
   displayText: "home",
   link: "/",
   icon: TiHome,
