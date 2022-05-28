@@ -5,12 +5,13 @@ import React from "react";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
-// import useDirectory from "../../hooks/useDirectory";
+import useDirectory from "../../hooks/useDirectory";
 
 type CreatePostProps = {};
 
 const CreatePostLink: React.FC<CreatePostProps> = () => {
   const router = useRouter();
+  const { toggleMenuOpen } = useDirectory();
   // const { toggleMenuOpen } = useDirectory();
   const onClick = () => {
     // Could check for user to open auth modal before redirecting to submit
@@ -22,7 +23,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
     // }
     router.push(`${communityId}/submit`);
     // Open directory menu to select community to post to
-    // toggleMenuOpen();
+    toggleMenuOpen();
   };
   return (
     <Flex
