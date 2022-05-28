@@ -21,9 +21,10 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { Post, postState } from "../../../atoms/postsAtom";
-import { firestore } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
@@ -152,6 +153,7 @@ const Comments: React.FC<ICommentsProps> = ({
     }
     //Update on local state
   };
+
   const getPostComments = async () => {
     try {
       const commentQuery = query(
