@@ -63,16 +63,16 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     const { communityId } = router.query;
     const { title, body } = textInputs;
     //New Post
-    const newPost: Post = {
-      communityId: communityId as string,
-      title: textInputs.title,
-      body: textInputs.body,
-      creatorId: user?.uid,
-      creatorDisplayName: user.email!.split("@")[0],
-      numberOfComments: 0,
-      voteStatus: 0,
-      createdAt: serverTimestamp() as Timestamp,
-    };
+    // const newPost: Post = {
+    //   communityId: communityId as string,
+    //   title: textInputs.title,
+    //   body: textInputs.body,
+    //   creatorId: user?.uid,
+    //   creatorDisplayName: user.email!.split("@")[0],
+    //   numberOfComments: 0,
+    //   voteStatus: 0,
+    //   createdAt: serverTimestamp() as Timestamp,
+    // };
     setLoading(true);
     try {
       // Create the post in db
