@@ -61,6 +61,7 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
   //handler for creating post in database
   const handleCreatePost = async () => {
     const { communityId } = router.query;
+    const { title, body } = textInputs;
     //New Post
     const newPost: Post = {
       communityId: communityId as string,
