@@ -29,6 +29,7 @@ import useSelectFile from "../../hooks/useSelectFile";
 
 interface INewPostFormProps {
   user: User;
+  communityImageURL?: string;
 }
 
 const formTabs: TabItem[] = [
@@ -44,7 +45,10 @@ export type TabItem = {
   icon: typeof Icon.arguments;
 };
 
-const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
+const NewPostForm: React.FC<INewPostFormProps> = ({
+  user,
+  communityImageURL,
+}) => {
   const router = useRouter();
   // Text Input
   const [textInputs, setTextInputs] = useState({
@@ -72,13 +76,14 @@ const NewPostForm: React.FC<INewPostFormProps> = ({ user }) => {
     //   numberOfComments: 0,
     //   voteStatus: 0,
     //   createdAt: serverTimestamp() as Timestamp,
+    //   communityImageURL: communityImageURL || "",
     // };
     setLoading(true);
     try {
       // Create the post in db
       const postDocRef = await addDoc(collection(firestore, "posts"), {
         communityId,
-        // communityImageURL: communityImageURL || "",
+        communityImageURL: communityImageURL || "",
         creatorId: user.uid,
         userDisplayText: user.email!.split("@")[0],
         title,
