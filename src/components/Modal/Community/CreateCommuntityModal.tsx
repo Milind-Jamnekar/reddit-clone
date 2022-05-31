@@ -88,6 +88,10 @@ export const CreateCommunityModal: React.FC<{
             isMod: true,
           }
         );
+
+        handleClose();
+        toggleMenuOpen();
+        router.push(`r/${communityName}`);
       });
     } catch (error: any) {
       console.log("Handled errors", error);
