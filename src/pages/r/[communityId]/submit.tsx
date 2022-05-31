@@ -21,7 +21,14 @@ const SubmitPage: NextPage = () => {
             Create post
           </Text>
         </Box>
-        {user && <NewPostForm user={user} />}
+        {user && (
+          <NewPostForm
+            user={user}
+            communityImageURL={
+              communityStateValue.currentCommunity?.profileImageURL
+            }
+          />
+        )}
       </>
       <>
         {communityStateValue.currentCommunity && (
