@@ -19,11 +19,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import {
-  doc,
-  getDoc,
-  runTransaction,
-  serverTimestamp,
-  setDoc,
+  doc, runTransaction,
+  serverTimestamp
 } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
