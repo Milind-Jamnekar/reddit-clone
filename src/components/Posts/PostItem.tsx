@@ -7,6 +7,7 @@ import {
   HStack,
   Icon,
   Image,
+  Link,
   Skeleton,
   Spinner,
   Text,
@@ -16,7 +17,8 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { BsChat } from "react-icons/bs";
+import { BsChat, BsDot } from "react-icons/bs";
+import { FaReddit } from "react-icons/fa";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -39,6 +41,7 @@ interface IPostItemProps {
   ) => void;
   onSelectPost?: (post: Post) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
+  homePage?: boolean;
 }
 
 const PostItem: React.FunctionComponent<IPostItemProps> = ({
@@ -48,6 +51,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   onDeletePost,
   onSelectPost,
   onVote,
+  homePage,
 }) => {
   const [error, setError] = useState("");
   const [loadingImage, setLoadinImage] = useState(true);
@@ -79,7 +83,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   // 1000 karma convert to 1k
   function kFormatter(num: number) {
     return Math.abs(num) > 999
-      ? Math.sign(num) * (Math.abs(num) / 1000) + "k"
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
       : Math.sign(num) * Math.abs(num);
   }
 
@@ -148,6 +152,28 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
           {/* User Info  */}
           <HStack>
             {/* Home Page check  */}
+            {homePage && (
+              <Flex align="center" gap={1}>
+                {post.communityImageURL ? (
+                  <Image
+                    src={post.communityImageURL}
+                    borderRadius="full"
+                    boxSize="16px"
+                    alt=" "
+                  />
+                ) : (
+                  <Icon as={FaReddit} fontSize="16pt" color="blue.500" />
+                )}
+                <Link href={`r/${post.communityId}`}>
+                  <Text
+                    fontWeight={600}
+                    _hover={{ textDecoration: "underline" }}
+                    onClick={(e) => e.stopPropagation()}
+                  >{`r/${post.communityId}`}</Text>
+                </Link>
+                <Icon as={BsDot} fontSize="10px" color="gray.500" />
+              </Flex>
+            )}
             <Text fontSize="10pt" color="gray.500">
               Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
