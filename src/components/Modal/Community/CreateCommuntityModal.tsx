@@ -39,6 +39,7 @@ export const CreateCommunityModal: React.FC<{
   const [communityType, setCommunityType] = useState("public");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { toggleMenuOpen } = useDirectory();
 
   const onCommunityTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommunityType(e.target.name);
