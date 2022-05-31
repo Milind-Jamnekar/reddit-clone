@@ -26,11 +26,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
 import { auth, firestore } from "../../../firebase/clientApp";
+import useDirectory from "../../../hooks/useDirectory";
 
 export const CreateCommunityModal: React.FC<{
   open: boolean;
   handleClose: () => void;
 }> = ({ open, handleClose }) => {
+  const router = useRouter();
   const [user] = useAuthState(auth);
   const [communityName, setCommunityName] = useState("");
   const [charCount, setCharCount] = useState(21);
