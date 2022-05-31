@@ -42,7 +42,6 @@ const Posts: React.FunctionComponent<IPostsProps> = ({ communityData }) => {
         ...prev,
         posts: posts as Post[],
       }));
-      console.log(posts);
     } catch (error: any) {
       console.log("getPosts error", error.message);
     }
