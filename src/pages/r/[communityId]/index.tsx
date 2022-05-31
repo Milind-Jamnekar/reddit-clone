@@ -53,15 +53,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       context.query.communityId as string
     );
 
-    const Object = await getDoc(communityDocRef);
-    const communityData = await Object;
+    const communityDoc = await getDoc(communityDocRef);
+    // const communityData = await Object;
+    console.log(communityDoc.data());
+
     return {
       props: {
-        data: communityData.exists()
+        data: communityDoc.exists()
           ? JSON.parse(
               safeJsonStringify({
-                id: communityData.id,
-                ...communityData.data(),
+                id: communityDoc.id,
+                ...communityDoc.data(),
               })
             )
           : "",
