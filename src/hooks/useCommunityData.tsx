@@ -78,8 +78,6 @@ export const useCommunityData = () => {
         profileImageURL: communityData.profileImageURL || "",
       };
 
-      console.log(user?.uid);
-
       batch.set(
         doc(
           firestore,
