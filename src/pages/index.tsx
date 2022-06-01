@@ -13,6 +13,9 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Post, PostVote } from "../atoms/postsAtom";
 import CreatePostLink from "../components/Communtiy/CreatePostLink";
+import PersonalHome from "../components/Communtiy/PersonalHome";
+import Premium from "../components/Communtiy/Premium";
+import Recommendation from "../components/Communtiy/Recommendation";
 import PageContent from "../components/Layout/PageContent";
 import PostLoader from "../components/Posts/Loading";
 import PostItem from "../components/Posts/PostItem";
@@ -165,7 +168,11 @@ const Home: NextPage = () => {
             </Stack>
           )}
         </>
-        <>{/* Recomandetion  */}</>
+        <Stack spacing={5}>
+          <Recommendation />
+          <Premium />
+          <PersonalHome />
+        </Stack>
       </PageContent>
     </>
   );
