@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   Icon,
+  Image,
   Menu,
   MenuButton,
   MenuDivider,
