@@ -46,7 +46,23 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         <Flex align="center">
           {user ? (
             <>
-              <Icon fontSize={28} mr={1} color="gray.300" as={FaRedditSquare} />
+              {user.photoURL ? (
+                <Image
+                  src={user.photoURL}
+                  width="30px"
+                  height="30px"
+                  borderRadius="full"
+                  alt=""
+                  mr={1}
+                />
+              ) : (
+                <Icon
+                  fontSize={28}
+                  mr={1}
+                  color="gray.300"
+                  as={FaRedditSquare}
+                />
+              )}
               <Box
                 display={{ base: "none", lg: "flex" }}
                 flexDirection="column"
@@ -73,6 +89,15 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <>
             <MenuItem fontSize="10pt" fontWeight="700">
               <Flex gap={2} align="center">
+                {user.photoURL ? (
+                  <Image
+                    src={user.photoURL}
+                    width="30px"
+                    height="30px"
+                    borderRadius="full"
+                    alt=""
+                  />
+                ) : (
                 <Icon as={CgProfile} fontSize={25} />
                 Profile
               </Flex>
