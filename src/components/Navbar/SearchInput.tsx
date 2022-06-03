@@ -11,11 +11,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
   return (
     <Flex flexGrow={1} maxWidth={user ? "auto" : "600px"} align="center">
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          // eslint-disable-next-line react/no-children-prop
-          children={<SearchIcon mb={1} color="gray.300" />}
-        />
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon mb={1} color="gray.300" />
+        </InputLeftElement>
         <Input
           type="search"
           fontSize="18px"
