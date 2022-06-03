@@ -98,7 +98,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                     alt=""
                   />
                 ) : (
-                <Icon as={CgProfile} fontSize={25} />
+                  <Icon as={CgProfile} fontSize={25} />
+                )}
                 Profile
               </Flex>
             </MenuItem>
