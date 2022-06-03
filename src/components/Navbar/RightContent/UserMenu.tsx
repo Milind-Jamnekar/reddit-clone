@@ -72,14 +72,14 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         {user ? (
           <>
             <MenuItem fontSize="10pt" fontWeight="700">
-              <Flex gap={2}>
+              <Flex gap={2} align="center">
                 <Icon as={CgProfile} fontSize={25} />
                 Profile
               </Flex>
             </MenuItem>
             <MenuDivider />
             <MenuItem fontSize="10pt" fontWeight="700" onClick={logout}>
-              <Flex gap={2}>
+              <Flex gap={2} align="center">
                 <Icon as={MdOutlineLogin} fontSize={25} />
                 Signout
               </Flex>
