@@ -71,23 +71,14 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
       <MenuList mt={2}>
         {user ? (
           <>
-            <MenuItem
-              fontSize="10pt"
-              fontWeight="700"
-              _hover={{ bg: "blue.600", color: "white" }}
-            >
+            <MenuItem fontSize="10pt" fontWeight="700">
               <Flex gap={2}>
                 <Icon as={CgProfile} fontSize={25} />
                 Profile
               </Flex>
             </MenuItem>
             <MenuDivider />
-            <MenuItem
-              fontSize="10pt"
-              fontWeight="700"
-              _hover={{ bg: "blue.600", color: "white" }}
-              onClick={logout}
-            >
+            <MenuItem fontSize="10pt" fontWeight="700" onClick={logout}>
               <Flex gap={2}>
                 <Icon as={MdOutlineLogin} fontSize={25} />
                 Signout
@@ -98,7 +89,6 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <MenuItem
             fontSize="10pt"
             fontWeight="700"
-            _hover={{ bg: "blue.600", color: "white" }}
             onClick={() => {
               setAuthState({ open: true, view: "login" });
             }}
