@@ -11,7 +11,12 @@ export default function PageContent({ children }: IPageContentProps) {
     <Flex justify="center" p="16px 0px">
       <Flex width="95%" maxWidth="860px" justify="center">
         {/* Left hand side  */}
-        <Flex direction="column" width={["100%", "65%"]} mr={[0, 6]}>
+        <Flex
+          direction="column"
+          width={["100%", "65%"]}
+          flexGrow={[0, 1]}
+          mr={[0, 6]}
+        >
           {" "}
           {children && children[0 as keyof typeof children]}
         </Flex>
