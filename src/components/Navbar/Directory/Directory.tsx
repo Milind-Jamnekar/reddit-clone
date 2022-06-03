@@ -35,7 +35,7 @@ export const Directory: React.FC = () => {
               <Image
                 src={directoryState.selectedMenuItem.imageURL}
                 borderRadius="full"
-                boxSize="24px"
+                boxSize="27px"
                 mr={2}
                 alt={directoryState.selectedMenuItem.displayText + "image"}
               />
