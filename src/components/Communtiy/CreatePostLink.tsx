@@ -37,6 +37,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
       p={2}
       gap={3}
       mb={4}
+      position="relative"
     >
       {user ? (
         <Image
@@ -48,6 +49,17 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
         />
       ) : (
         <Icon as={FaReddit} fontSize={36} color="gray.300" />
+      )}
+      <Box
+        w="14px"
+        h="14px"
+        bg="green.400"
+        borderRadius="full"
+        border="2px solid white"
+        position="absolute"
+        bottom="6px"
+        left="34px"
+      />
       <Input
         placeholder="Create Post"
         fontSize="10pt"
