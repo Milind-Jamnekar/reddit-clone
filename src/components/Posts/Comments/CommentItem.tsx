@@ -25,6 +25,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 }) => {
   const [editInput, setEditInput] = useState(false);
   const [editText, setEditText] = useState(comment.text);
+  const { postStateValue } = usePostsData();
 
   return (
     <Flex>
