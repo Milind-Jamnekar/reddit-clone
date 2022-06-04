@@ -38,6 +38,15 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
       gap={3}
       mb={4}
     >
+      {user ? (
+        <Image
+          src={user.photoURL as string}
+          width="40px"
+          height="40px"
+          borderRadius="full"
+          alt={`${user.displayName} profile image`}
+        />
+      ) : (
       <Icon as={FaReddit} fontSize={36} color="gray.300" />
       <Input
         placeholder="Create Post"
