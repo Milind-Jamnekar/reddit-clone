@@ -8,14 +8,16 @@ import {
   MenuList,
   Text,
   Image,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import React from "react";
-import { TiHome } from "react-icons/ti";
 import useDirectory from "../../../hooks/useDirectory";
 import { Communities } from "./Communitites";
+import SideMenu from "./SideMenu";
 
 export const Directory: React.FC = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
+  const [isLargerThan400] = useMediaQuery("(min-width: 400px)");
 
   return (
     <Menu isOpen={directoryState.isOpen}>
@@ -53,9 +55,14 @@ export const Directory: React.FC = () => {
           <ChevronDownIcon fontSize={23} />
         </HStack>
       </MenuButton>
-      <MenuList>
-        <Communities />
-      </MenuList>
+
+      {isLargerThan400 ? (
+        <MenuList>
+          <Communities />
+        </MenuList>
+      ) : (
+        <SideMenu />
+      )}
     </Menu>
   );
 };
