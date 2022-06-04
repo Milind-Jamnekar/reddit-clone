@@ -47,7 +47,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
           alt={`${user.displayName} profile image`}
         />
       ) : (
-      <Icon as={FaReddit} fontSize={36} color="gray.300" />
+        <Icon as={FaReddit} fontSize={36} color="gray.300" />
       <Input
         placeholder="Create Post"
         fontSize="10pt"
