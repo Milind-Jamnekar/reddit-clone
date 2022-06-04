@@ -34,6 +34,11 @@ const CommentItem: React.FC<CommentItemProps> = ({
       <Stack spacing={1}>
         <Stack direction="row" align="center " fontSize="8pt">
           <Text fontWeight="700">{comment.creatorDisplayText}</Text>
+          {postStateValue.selectedPost?.creatorId === userId && (
+            <Text textColor="rgb(0 121 211)" fontWeight={700}>
+              OP
+            </Text>
+          )}
           <Text color="gray.500">
             {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
