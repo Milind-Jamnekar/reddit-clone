@@ -1,14 +1,17 @@
-import { Flex, Icon, Input } from "@chakra-ui/react";
+import { Box, Flex, Icon, Image, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
+import { auth } from "../../firebase/clientApp";
 import useDirectory from "../../hooks/useDirectory";
 
 type CreatePostProps = {};
 
 const CreatePostLink: React.FC<CreatePostProps> = () => {
+  const [user] = useAuthState(auth);
   const router = useRouter();
   const { toggleMenuOpen } = useDirectory();
   // const { toggleMenuOpen } = useDirectory();
