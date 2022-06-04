@@ -1,4 +1,4 @@
-import { Flex, Icon, Image, MenuItem } from "@chakra-ui/react";
+import { Flex, Icon, Image, MenuItem, Text } from "@chakra-ui/react";
 import React from "react";
 import { IconType } from "react-icons";
 import useDirectory from "../../../hooks/useDirectory";
@@ -27,6 +27,7 @@ const MenuListItem: React.FC<IMenuListItemProps> = ({
       onClick={() =>
         onSelectMenuItem({ displayText, link, icon, imageURL, iconColor })
       }
+      mb={{ base: 2, sm: 0 }}
     >
       <Flex align="center">
         {imageURL ? (
@@ -40,7 +41,7 @@ const MenuListItem: React.FC<IMenuListItemProps> = ({
         ) : (
           <Icon as={icon} fontSize={35} mr={2} color={iconColor} />
         )}
-        {displayText}
+        <Text fontSize={{ base: "18px", sm: "unset" }}>{displayText}</Text>
       </Flex>
     </MenuItem>
   );

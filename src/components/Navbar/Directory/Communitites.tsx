@@ -1,4 +1,4 @@
-import { Box, Icon, MenuItem, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
@@ -11,10 +11,16 @@ export const Communities: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
   const snippets = useRecoilValue(CommunityState).mySnippets;
   return (
-    <>
+    <Flex direction="column" gap={{ base: "4" }}>
       <CreateCommunityModal open={isOpen} handleClose={() => setOpen(false)} />
-      <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.600">
+      <Box>
+        <Text
+          pl={{ base: 0, sm: 3 }}
+          mb={2}
+          fontSize={{ base: "14pt", sm: "8pt" }}
+          fontWeight={500}
+          color="gray.600"
+        >
           Moderating
         </Text>
         {snippets
@@ -30,8 +36,14 @@ export const Communities: React.FC = () => {
             />
           ))}
       </Box>
-      <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="8pt" fontWeight={500} color="gray.600">
+      <Box>
+        <Text
+          pl={{ base: 0, sm: 3 }}
+          fontSize={{ base: "14pt", md: "8pt" }}
+          mb={1}
+          fontWeight={500}
+          color="gray.600"
+        >
           MY Communities
         </Text>
         <MenuItem
@@ -40,8 +52,11 @@ export const Communities: React.FC = () => {
           _hover={{ bg: "gray.100" }}
           gap={2}
           alignContent="center"
+          // justifyContent="center"
           onClick={() => setOpen(true)}
-          p={2}
+          padding="10px 10px 10px 0px"
+          pl={{ base: 0, sm: 2 }}
+          mb={{ base: 2, sm: 0 }}
         >
           <Icon ml={3} as={GrAdd} fontSize={20} />
           <Text fontSize="11pt">Communitites</Text>
@@ -57,6 +72,6 @@ export const Communities: React.FC = () => {
           />
         ))}
       </Box>
-    </>
+    </Flex>
   );
 };

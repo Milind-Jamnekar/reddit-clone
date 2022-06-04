@@ -7,6 +7,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import useDirectory from "../../../hooks/useDirectory";
+import { Communities } from "./Communitites";
 
 function SideMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,11 +23,9 @@ function SideMenu() {
       >
         <DrawerOverlay bg="none" backdropFilter="auto" backdropBlur="3px" />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
-          <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+          <DrawerHeader borderBottomWidth="1px">Communities</DrawerHeader>
+          <DrawerBody ml={1}>
+            <Communities />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
