@@ -6,6 +6,7 @@ import {
   IoArrowDownCircleOutline,
   IoArrowUpCircleOutline,
 } from "react-icons/io5";
+import usePostsData from "../../../hooks/usePostsData";
 import { Comment } from "./Comments";
 
 interface CommentItemProps {
