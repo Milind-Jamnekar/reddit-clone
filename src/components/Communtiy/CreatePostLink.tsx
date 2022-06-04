@@ -42,7 +42,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
       mb={4}
       position="relative"
     >
-      {user ? (
+      {user?.photoURL ? (
         <Image
           src={user.photoURL as string}
           width="40px"
