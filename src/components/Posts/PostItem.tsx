@@ -177,7 +177,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
                 <Icon as={BsDot} fontSize="10px" color="gray.500" />
               </Flex>
             )}
-            <Text fontSize="10pt" color="gray.500">
+            <Text fontSize="9pt" color="gray.500">
               Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
             </Text>
