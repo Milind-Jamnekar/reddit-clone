@@ -1,4 +1,10 @@
-import { Flex, Image } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Image,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -13,11 +19,13 @@ const Directory = dynamic(() => import("./Directory/Directory"));
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("white", "blackAlpha.800");
 
   return (
     <Flex
       gap={2}
-      bg="white"
+      bg={bg}
       h="50px"
       padding="6px 12px"
       align="center"
@@ -29,9 +37,14 @@ const Navbar: React.FC = () => {
         cursor="pointer"
         onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
+        <Button onClick={toggleColorMode}>Toggle color</Button>
         <Image src="/images/redditFace.svg" h="30px" alt="Reddit Face logo" />
         <Image
-          src="/images/redditText.svg"
+          src={
+            colorMode === "light"
+              ? "/images/redditText.svg"
+              : "/images/Reddit-Word-Dark.svg"
+          }
           h="46px"
           display={{ base: "none", md: "unset" }}
           alt="Reddit text logo"
