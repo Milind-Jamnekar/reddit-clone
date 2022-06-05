@@ -8,7 +8,9 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Switch,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
 import React from "react";
@@ -18,7 +20,7 @@ import { FaRedditSquare } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
-import { useSetRecoilState, useResetRecoilState } from "recoil";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
 import { CommunityState } from "../../../atoms/communitiesAtom";
 import { auth } from "../../../firebase/clientApp";
@@ -30,6 +32,7 @@ type UserMenuProps = {
 export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const resetCommunityState = useResetRecoilState(CommunityState);
   const setAuthState = useSetRecoilState(authModalState);
+  const { toggleColorMode } = useColorMode();
 
   const logout = async () => {
     await signOut(auth);
@@ -86,6 +89,12 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         </Flex>
       </MenuButton>
       <MenuList mt={2}>
+        <MenuItem fontSize="10pt" fontWeight="700" closeOnSelect={false}>
+          <Flex gap={2} align="center">
+            <Switch onChange={toggleColorMode} />
+            <Text>Dark Mode</Text>
+          </Flex>
+        </MenuItem>
         {user ? (
           <>
             <MenuItem fontSize="10pt" fontWeight="700">
