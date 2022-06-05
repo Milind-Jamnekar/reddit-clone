@@ -1,5 +1,5 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { BsArrowUpRightCircle, BsChatDots } from "react-icons/bs";
 import { GrAdd } from "react-icons/gr";
 import {
@@ -9,6 +9,9 @@ import {
 } from "react-icons/io5";
 
 export const Icons: React.FC = () => {
+  const hoverBg = useColorModeValue("gray.200", "whiteAlpha.200");
+  const color = useColorModeValue("black.900", "white");
+
   return (
     <>
       <Flex gap={2}>
@@ -24,7 +27,7 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
             <Icon as={BsArrowUpRightCircle} fontSize={23} />
           </Flex>
@@ -32,7 +35,7 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
             <Icon as={IoFilterCircleOutline} fontSize={25} />
           </Flex>
@@ -40,7 +43,7 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
             <Icon as={IoVideocamOutline} fontSize={25} />
           </Flex>
@@ -50,7 +53,7 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
             <Icon as={BsChatDots} fontSize={23} />
           </Flex>
@@ -58,7 +61,7 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
             <Icon as={IoNotificationsOutline} fontSize={23} />
           </Flex>
@@ -67,9 +70,9 @@ export const Icons: React.FC = () => {
             padding={1}
             cursor="pointer"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ bg: hoverBg }}
           >
-            <Icon as={GrAdd} fontSize={23} />
+            <Icon as={GrAdd} fontSize={23} color={color} />
           </Flex>
         </Flex>
       </Flex>
