@@ -1,7 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 import { User } from "firebase/auth";
+import dynamic from "next/dynamic";
 import React from "react";
-import AuthModal from "../../Modal/Auth/AuthModal";
+
 import AuthButtons from "./AuthButtons";
 import { Icons } from "./Icons";
 import { UserMenu } from "./UserMenu";
@@ -9,6 +10,8 @@ import { UserMenu } from "./UserMenu";
 type RightContentProps = {
   user?: User | null;
 };
+
+const AuthModal = dynamic(() => import("../../Modal/Auth/AuthModal"));
 
 const RightContent: React.FC<RightContentProps> = ({ user }) => {
   return (

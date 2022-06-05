@@ -1,12 +1,14 @@
 import { Flex, Image } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { defaultMenuItem } from "../../atoms/directoryMenuItem";
 import { auth } from "../../firebase/clientApp";
 import useDirectory from "../../hooks/useDirectory";
-import { Directory } from "./Directory/Directory";
 import RightContent from "./RightContent/RightContent";
 import SearchInput from "./SearchInput";
+
+const Directory = dynamic(() => import("./Directory/Directory"));
 
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);

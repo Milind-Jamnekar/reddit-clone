@@ -15,7 +15,7 @@ import useDirectory from "../../../hooks/useDirectory";
 import { Communities } from "./Communitites";
 import SideMenu from "./SideMenu";
 
-export const Directory: React.FC = () => {
+const Directory: React.FC = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
   const [isLargerThan400] = useMediaQuery("(min-width: 400px)");
 
@@ -66,3 +66,5 @@ export const Directory: React.FC = () => {
     </Menu>
   );
 };
+
+export default Directory;
