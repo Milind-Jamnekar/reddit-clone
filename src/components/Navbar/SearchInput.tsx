@@ -1,5 +1,11 @@
 import { SearchIcon } from "@chakra-ui/icons";
-import { Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import {
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { User } from "firebase/auth";
 
@@ -8,6 +14,10 @@ type SearchInputProps = {
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
+  const bg = useColorModeValue("gray.100", "whiteAlpha.100");
+  const hoverBg = useColorModeValue("white", "blackAlpha.600");
+  const color = useColorModeValue("blue.500", "white");
+
   return (
     <Flex flexGrow={1} maxWidth={user ? "auto" : "600px"} align="center">
       <InputGroup>
@@ -18,8 +28,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
           type="search"
           fontSize="18px"
           placeholder="Reddit Search"
+          bg={bg}
           _placeholder={{ color: "gray.500" }}
-          _hover={{ bg: "white", border: "1px solid", borderColor: "blue.500" }}
+          _hover={{ bg: bg, border: "1px solid", borderColor: { color } }}
           _focus={{
             outline: "none",
             border: "1px solid",
