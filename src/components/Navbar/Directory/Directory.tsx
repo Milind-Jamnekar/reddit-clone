@@ -25,7 +25,7 @@ const Directory: React.FC = () => {
         cursor="pointer"
         padding="3px 6px"
         borderRadius={4}
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        _hover={{ outline: "1px solid", outlineColor: "gray.300" }}
         onClick={toggleMenuOpen}
       >
         <HStack
