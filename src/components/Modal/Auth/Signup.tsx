@@ -75,6 +75,7 @@ const Signup: React.FC = () => {
           type="email"
           mb={3}
           onChange={onChange}
+          autoComplete="email"
           _placeholder={{ color: "gray.500" }}
           _hover={{ bg: "white", border: "1px solid", borderColor: "blue.500" }}
           _focus={{
@@ -90,6 +91,7 @@ const Signup: React.FC = () => {
           name="password"
           placeholder="Password"
           type="password"
+          autoComplete="new-password"
           mb={3}
           onChange={onChange}
           _placeholder={{ color: "gray.500" }}
@@ -107,6 +109,7 @@ const Signup: React.FC = () => {
           name="confirmPassword"
           placeholder="Confirm Password"
           type="password"
+          autoComplete="confirm-password"
           mb={3}
           onChange={onChange}
           _placeholder={{ color: "gray.500" }}

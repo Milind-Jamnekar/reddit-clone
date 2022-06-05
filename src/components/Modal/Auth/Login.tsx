@@ -51,6 +51,7 @@ const Login: React.FC = () => {
           placeholder="Email"
           type="email"
           mb={3}
+          autoComplete="email"
           onChange={onChange}
           _placeholder={{ color: "gray.500" }}
           _hover={{ bg: "white", border: "1px solid", borderColor: "blue.500" }}
@@ -67,6 +68,7 @@ const Login: React.FC = () => {
           placeholder="Password"
           type="password"
           mb={3}
+          autoComplete="password"
           onChange={onChange}
           _placeholder={{ color: "gray.500" }}
           _hover={{ bg: "white", border: "1px solid", borderColor: "blue.500" }}

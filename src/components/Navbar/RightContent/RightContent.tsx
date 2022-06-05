@@ -2,7 +2,6 @@ import { Flex } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import dynamic from "next/dynamic";
 import React from "react";
-
 import AuthButtons from "./AuthButtons";
 import { Icons } from "./Icons";
 import { UserMenu } from "./UserMenu";
