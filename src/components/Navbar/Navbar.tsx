@@ -37,7 +37,6 @@ const Navbar: React.FC = () => {
         cursor="pointer"
         onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
-        <Button onClick={toggleColorMode}>Toggle color</Button>
         <Image src="/images/redditFace.svg" h="30px" alt="Reddit Face logo" />
         <Image
           src={
