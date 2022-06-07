@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 //Icons
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
@@ -28,7 +28,7 @@ import { HiLockClosed } from "react-icons/hi";
 import { auth, firestore } from "../../../firebase/clientApp";
 import useDirectory from "../../../hooks/useDirectory";
 
-export const CreateCommunityModal: React.FC<{
+export const CreateCommunityModal: FC<{
   open: boolean;
   handleClose: () => void;
 }> = ({ open, handleClose }) => {

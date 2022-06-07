@@ -6,14 +6,14 @@ import {
   InputLeftElement,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React from "react";
+import { FC } from "react";
 import { User } from "firebase/auth";
 
 type SearchInputProps = {
   user?: User | null;
 };
 
-const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
+const SearchInput: FC<SearchInputProps> = ({ user }) => {
   const bg = useColorModeValue("gray.100", "whiteAlpha.100");
   const hoverBg = useColorModeValue("white", "blackAlpha.600");
   const color = useColorModeValue("blue.500", "white");

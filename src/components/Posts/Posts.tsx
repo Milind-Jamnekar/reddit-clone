@@ -1,4 +1,4 @@
-import { Skeleton, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ const Posts: React.FunctionComponent<IPostsProps> = ({ communityData }) => {
         <Loading />
       ) : (
         <Stack>
-          <AnimatePresence initial={true}>
+          <AnimatePresence initial={false}>
             {postStateValue.posts.map((post) => (
               <PostItem
                 key={post.id}

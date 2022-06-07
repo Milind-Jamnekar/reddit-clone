@@ -1,12 +1,6 @@
-import {
-  Button,
-  Flex,
-  Image,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Image, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
-import React from "react";
+import { FC } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { defaultMenuItem } from "../../atoms/directoryMenuItem";
 import { auth } from "../../firebase/clientApp";
@@ -16,7 +10,7 @@ import SearchInput from "./SearchInput";
 
 const Directory = dynamic(() => import("./Directory/Directory"));
 
-const Navbar: React.FC = () => {
+const Navbar: FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
   const { colorMode, toggleColorMode } = useColorMode();

@@ -1,5 +1,5 @@
 import { Button, Flex, Input, Stack, Textarea } from "@chakra-ui/react";
-import * as React from "react";
+import { ChangeEvent, FC } from "react";
 
 interface ITextInputsProps {
   textInputs: {
@@ -8,13 +8,13 @@ interface ITextInputsProps {
   };
 
   onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleCreatePost: () => void;
   loading: boolean;
 }
 
-const TextInputs: React.FunctionComponent<ITextInputsProps> = ({
+const TextInputs: FC<ITextInputsProps> = ({
   textInputs,
   onChange,
   handleCreatePost,

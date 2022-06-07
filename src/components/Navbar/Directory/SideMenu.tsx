@@ -4,13 +4,11 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  useDisclosure,
 } from "@chakra-ui/react";
 import useDirectory from "../../../hooks/useDirectory";
 import { Communities } from "./Communitites";
 
 function SideMenu() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { directoryState, toggleMenuOpen } = useDirectory();
 
   return (

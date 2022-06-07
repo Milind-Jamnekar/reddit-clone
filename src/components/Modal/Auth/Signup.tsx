@@ -1,8 +1,8 @@
-import { Input, Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
@@ -15,7 +15,7 @@ const variants = {
   exit: { opacity: 0, x: 50 },
 };
 
-const Signup: React.FC = () => {
+const Signup: FC = () => {
   const setModalState = useSetRecoilState(authModalState);
   const [signUp, setSignUp] = useState({
     email: "",

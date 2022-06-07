@@ -13,18 +13,11 @@ import { auth, firestore } from "../../../../firebase/clientApp";
 import { useCommunityData } from "../../../../hooks/useCommunityData";
 import usePostsData from "../../../../hooks/usePostsData";
 
-interface IPostPageProps {}
-
-const PostPage: NextPage = (props) => {
+const PostPage: NextPage = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
-  const {
-    setPostStateValue,
-    postStateValue,
-    onVote,
-    onSelectPost,
-    onDeletePost,
-  } = usePostsData();
+  const { setPostStateValue, postStateValue, onVote, onDeletePost } =
+    usePostsData();
 
   const { communityStateValue } = useCommunityData();
 

@@ -13,24 +13,22 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
-import React from "react";
+import React, { FC } from "react";
 import { CgProfile } from "react-icons/cg";
+import { useSetRecoilState } from "recoil";
 //Icons
 import { FaRedditSquare } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
-import { CommunityState } from "../../../atoms/communitiesAtom";
 import { auth } from "../../../firebase/clientApp";
 
 type UserMenuProps = {
   user?: User | null;
 };
 
-export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
-  const resetCommunityState = useResetRecoilState(CommunityState);
+export const UserMenu: FC<UserMenuProps> = ({ user }) => {
   const setAuthState = useSetRecoilState(authModalState);
   const { toggleColorMode } = useColorMode();
 

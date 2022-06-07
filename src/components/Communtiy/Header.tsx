@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
-import * as React from "react";
+import { FC } from "react";
 import { FaReddit } from "react-icons/fa";
 import { BsBellFill } from "react-icons/bs";
 import { Community } from "../../atoms/communitiesAtom";
@@ -9,7 +9,7 @@ interface IHeaderProps {
   communityData: Community;
 }
 
-const Header: React.FC<IHeaderProps> = ({ communityData }) => {
+const Header: FC<IHeaderProps> = ({ communityData }) => {
   const { communityStateValue, onJoinOrLeaveCommunity, loading } =
     useCommunityData();
   const isJoined = !!communityStateValue.mySnippets.find(

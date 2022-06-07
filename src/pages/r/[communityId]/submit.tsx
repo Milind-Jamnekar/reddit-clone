@@ -1,8 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRecoilValue } from "recoil";
-import { CommunityState } from "../../../atoms/communitiesAtom";
 import About from "../../../components/Communtiy/About";
 import PageContent from "../../../components/Layout/PageContent";
 import NewPostForm from "../../../components/Posts/NewPostForm";

@@ -1,5 +1,5 @@
 import { Flex, Icon, Image, MenuItem, Text } from "@chakra-ui/react";
-import React from "react";
+import { FC } from "react";
 import { IconType } from "react-icons";
 import useDirectory from "../../../hooks/useDirectory";
 
@@ -11,7 +11,7 @@ interface IMenuListItemProps {
   imageURL?: string;
 }
 
-const MenuListItem: React.FC<IMenuListItemProps> = ({
+const MenuListItem: FC<IMenuListItemProps> = ({
   imageURL,
   iconColor,
   link,

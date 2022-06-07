@@ -4,18 +4,17 @@ import {
   Divider,
   Flex,
   Icon,
-  Link,
+  Image,
+  Input,
+  Spinner,
   Stack,
   Text,
-  Image,
-  Spinner,
-  Input,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import moment from "moment";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FaReddit } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
@@ -29,7 +28,7 @@ interface IAboutProps {
   communityData: Community;
 }
 
-const About: React.FunctionComponent<IAboutProps> = ({ communityData }) => {
+const About: FC<IAboutProps> = ({ communityData }) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const { setSelectedFile, selectedFile, onSelectedImage } = useSelectFile();

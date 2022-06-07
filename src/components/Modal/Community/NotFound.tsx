@@ -1,8 +1,7 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
 
-export const NotFound: React.FC = () => {
+export const NotFound = () => {
   return (
     <Flex direction="column" justify={"center"} align="center" minHeight="60vh">
       <Text fontSize="4xl">

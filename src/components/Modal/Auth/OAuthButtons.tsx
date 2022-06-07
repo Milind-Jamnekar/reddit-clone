@@ -1,12 +1,12 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import React, { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../../../firebase/clientApp";
 import { firebaseErrors } from "../../../firebase/firebaseErrors";
 
-const OAuthButtons: React.FC = () => {
+const OAuthButtons: FC = () => {
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);
 

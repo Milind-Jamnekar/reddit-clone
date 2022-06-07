@@ -9,9 +9,8 @@ import {
 } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect, MouseEvent } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { authModalState } from "../atoms/authModalAtom";
 import { CommunityState } from "../atoms/communitiesAtom";
@@ -26,7 +25,7 @@ const usePostsData = () => {
   const currentCommunity = useRecoilValue(CommunityState).currentCommunity;
 
   const onVote = async (
-    event: React.MouseEvent<SVGElement | MouseEvent>,
+    event: MouseEvent<SVGElement | MouseEvent>,
     post: Post,
     vote: number,
     communityId: string

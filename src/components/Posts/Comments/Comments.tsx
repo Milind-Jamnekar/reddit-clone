@@ -20,7 +20,7 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { Post, postState } from "../../../atoms/postsAtom";
 import { firestore } from "../../../firebase/clientApp";
@@ -44,11 +44,7 @@ export type Comment = {
   createdAt: Timestamp;
 };
 
-const Comments: React.FC<ICommentsProps> = ({
-  user,
-  selectedPost,
-  communityId,
-}) => {
+const Comments: FC<ICommentsProps> = ({ user, selectedPost, communityId }) => {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
   const [fetchLoading, setFetchLoading] = useState(false);

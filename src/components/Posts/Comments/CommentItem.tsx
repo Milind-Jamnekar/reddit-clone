@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import {
   IoArrowDownCircleOutline,
@@ -17,7 +17,7 @@ interface CommentItemProps {
   userId: string;
 }
 
-const CommentItem: React.FC<CommentItemProps> = ({
+const CommentItem: FC<CommentItemProps> = ({
   userId,
   onDeleteComment,
   onUpdateComment,

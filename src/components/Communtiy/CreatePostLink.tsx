@@ -1,6 +1,14 @@
-import { Box, Flex, Icon, Image, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Input,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import { FC } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
@@ -8,12 +16,13 @@ import { IoImageOutline } from "react-icons/io5";
 import { auth } from "../../firebase/clientApp";
 import useDirectory from "../../hooks/useDirectory";
 
-type CreatePostProps = {};
-
-const CreatePostLink: React.FC<CreatePostProps> = () => {
+const CreatePostLink: FC = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
   const { toggleMenuOpen } = useDirectory();
+  const bg = useColorModeValue("white", "blackAlpha.600");
+  const inputBg = useColorModeValue("white", "blackAlpha.300");
+  const { colorMode } = useColorMode();
   // const { toggleMenuOpen } = useDirectory();
   const onClick = () => {
     // Could check for user to open auth modal before redirecting to submit
@@ -32,15 +41,16 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
     <Flex
       justify="space-evenly"
       align="center"
-      bg="white"
+      bg={bg}
       height="56px"
       borderRadius={5}
-      border="1px solid"
+      border={colorMode === "light" ? "1px solid" : "none"}
       borderColor="gray.300"
       p={2}
       gap={3}
       mb={4}
       position="relative"
+      boxShadow="md"
     >
       {user?.photoURL ? (
         <Image
@@ -68,18 +78,19 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
         fontSize="10pt"
         _placeholder={{ color: "gray.500" }}
         _hover={{
-          bg: "white",
+          // bg: { c  olorMode === 'light' ? "white" : 'blackAlpha.600'},
+          bg: { inputBg },
           border: "1px solid",
           borderColor: "blue.500",
         }}
         _focus={{
           outline: "none",
-          bg: "white",
+          bg: { inputBg },
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg="gray.50"
-        borderColor="gray.200"
+        bg={colorMode === "light" ? "gray.50" : "blackAlpha.300"}
+        borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
         height="36px"
         borderRadius={5}
         onClick={onClick}

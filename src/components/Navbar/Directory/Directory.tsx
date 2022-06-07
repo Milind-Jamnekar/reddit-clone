@@ -3,19 +3,19 @@ import {
   Flex,
   HStack,
   Icon,
+  Image,
   Menu,
   MenuButton,
   MenuList,
   Text,
-  Image,
   useMediaQuery,
 } from "@chakra-ui/react";
-import React from "react";
+import { FC } from "react";
 import useDirectory from "../../../hooks/useDirectory";
 import { Communities } from "./Communitites";
 import SideMenu from "./SideMenu";
 
-const Directory: React.FC = () => {
+const Directory: FC = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
   const [isLargerThan400] = useMediaQuery("(min-width: 400px)");
 

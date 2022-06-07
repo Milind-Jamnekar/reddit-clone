@@ -1,5 +1,5 @@
-import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import { FC } from "react";
 import { BsArrowUpRightCircle, BsChatDots } from "react-icons/bs";
 import { GrAdd } from "react-icons/gr";
 import {
@@ -8,7 +8,7 @@ import {
   IoVideocamOutline,
 } from "react-icons/io5";
 
-export const Icons: React.FC = () => {
+export const Icons: FC = () => {
   const hoverBg = useColorModeValue("gray.200", "whiteAlpha.200");
   const color = useColorModeValue("black.900", "white");
 

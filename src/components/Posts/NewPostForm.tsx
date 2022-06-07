@@ -11,21 +11,19 @@ import {
   addDoc,
   collection,
   serverTimestamp,
-  Timestamp,
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { firestore, storage } from "../../firebase/clientApp";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentTextOutline, IoImageOutline } from "react-icons/io5";
-import { Post } from "../../atoms/postsAtom";
-import ImageUpload from "./PostForm/ImageUpload";
-import TabItem from "./TabItem";
-import TextInputs from "./PostForm/TextInputs";
+import { firestore, storage } from "../../firebase/clientApp";
 import useSelectFile from "../../hooks/useSelectFile";
+import ImageUpload from "./PostForm/ImageUpload";
+import TextInputs from "./PostForm/TextInputs";
+import TabItem from "./TabItem";
 
 interface INewPostFormProps {
   user: User;
@@ -45,10 +43,7 @@ export type TabItem = {
   icon: typeof Icon.arguments;
 };
 
-const NewPostForm: React.FC<INewPostFormProps> = ({
-  user,
-  communityImageURL,
-}) => {
+const NewPostForm: FC<INewPostFormProps> = ({ user, communityImageURL }) => {
   const router = useRouter();
   // Text Input
   const [textInputs, setTextInputs] = useState({

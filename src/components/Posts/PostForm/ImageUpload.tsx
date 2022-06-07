@@ -1,14 +1,14 @@
 import { Button, Flex, Image, Input, Stack } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import { FC, useRef } from "react";
 
-interface IImageUploadProps {
+interface ImageUploadProps {
   onSelectedImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedFile: string;
   setSelectedFile: (value: string) => void;
   setSelectedTab: (value: string) => void;
 }
 
-const ImageUpload: React.FunctionComponent<IImageUploadProps> = ({
+const ImageUpload: FC<ImageUploadProps> = ({
   onSelectedImage,
   setSelectedTab,
   setSelectedFile,

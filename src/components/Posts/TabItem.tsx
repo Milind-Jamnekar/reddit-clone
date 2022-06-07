@@ -1,5 +1,5 @@
 import { Flex, Icon, Text } from "@chakra-ui/react";
-import * as React from "react";
+import { FC, memo } from "react";
 import { TabItem } from "./NewPostForm";
 
 interface ITabItemProps {
@@ -8,11 +8,7 @@ interface ITabItemProps {
   setSelectedTab: (value: string) => void;
 }
 
-const TabItem: React.FunctionComponent<ITabItemProps> = ({
-  item,
-  selected,
-  setSelectedTab,
-}) => {
+const TabItem: FC<ITabItemProps> = ({ item, selected, setSelectedTab }) => {
   return (
     <Flex
       align="center"
@@ -41,4 +37,4 @@ const TabItem: React.FunctionComponent<ITabItemProps> = ({
   );
 };
 
-export default React.memo(TabItem);
+export default memo(TabItem);

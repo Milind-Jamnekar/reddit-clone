@@ -15,7 +15,7 @@ import {
 import { motion } from "framer-motion";
 import moment from "moment";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { FC, useState, MouseEvent } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
@@ -34,7 +34,7 @@ interface IPostItemProps {
   userIsCreator: boolean;
   userVoteValue?: number;
   onVote: (
-    event: React.MouseEvent<SVGElement | MouseEvent>,
+    event: MouseEvent<SVGElement | MouseEvent>,
     post: Post,
     vote: number,
     communityId: string
@@ -44,7 +44,7 @@ interface IPostItemProps {
   homePage?: boolean;
 }
 
-const PostItem: React.FunctionComponent<IPostItemProps> = ({
+const PostItem: FC<IPostItemProps> = ({
   post,
   userIsCreator,
   userVoteValue,
@@ -60,7 +60,7 @@ const PostItem: React.FunctionComponent<IPostItemProps> = ({
   const router = useRouter();
 
   const handlePostDelete = async (
-    event: React.MouseEvent<HTMLDivElement | MouseEvent>
+    event: MouseEvent<HTMLDivElement | MouseEvent>
   ) => {
     event.stopPropagation();
     setLoadingDelete(true);

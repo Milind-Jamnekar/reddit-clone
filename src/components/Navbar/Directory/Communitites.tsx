@@ -1,5 +1,5 @@
 import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
 import { useRecoilValue } from "recoil";
@@ -7,7 +7,7 @@ import { CommunityState } from "../../../atoms/communitiesAtom";
 import { CreateCommunityModal } from "../../Modal/Community/CreateCommuntityModal";
 import MenuListItem from "./MenuListItems";
 
-export const Communities: React.FC = () => {
+export const Communities: FC = () => {
   const [isOpen, setOpen] = useState(false);
   const snippets = useRecoilValue(CommunityState).mySnippets;
   return (

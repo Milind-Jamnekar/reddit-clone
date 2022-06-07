@@ -10,21 +10,14 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import {
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { useEffect, useState, FC } from "react";
 import { FaReddit } from "react-icons/fa";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
 import { useCommunityData } from "../../hooks/useCommunityData";
 
-const Recommendation: React.FC = (props) => {
+const Recommendation: FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinOrLeaveCommunity } = useCommunityData();

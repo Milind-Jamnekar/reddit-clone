@@ -1,9 +1,9 @@
 import { Button, Flex } from "@chakra-ui/react";
-import React from "react";
+import { FC } from "react";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
 
-const AuthButtons: React.FC = () => {
+const AuthButtons: FC = () => {
   const setModalState = useSetRecoilState(authModalState);
   return (
     <Flex gap={2} mx={2}>
