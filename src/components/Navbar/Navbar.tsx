@@ -13,7 +13,7 @@ const Directory = dynamic(() => import("./Directory/Directory"));
 const Navbar: FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const bg = useColorModeValue("white", "blackAlpha.800");
 
   return (
@@ -23,6 +23,7 @@ const Navbar: FC = () => {
       h="50px"
       padding="6px 12px"
       align="center"
+      boxShadow="lg"
       justifyContent={user ? "space-between" : "center"}
     >
       <Flex
