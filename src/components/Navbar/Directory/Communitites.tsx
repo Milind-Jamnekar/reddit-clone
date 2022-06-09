@@ -1,4 +1,11 @@
-import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Icon,
+  MenuItem,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
@@ -9,6 +16,7 @@ import MenuListItem from "./MenuListItems";
 
 export const Communities: FC = () => {
   const [isOpen, setOpen] = useState(false);
+  const { colorMode } = useColorMode();
   const snippets = useRecoilValue(CommunityState).mySnippets;
   return (
     <Flex direction="column" gap={{ base: "4" }}>
@@ -19,7 +27,7 @@ export const Communities: FC = () => {
           mb={2}
           fontSize={{ base: "14pt", sm: "8pt" }}
           fontWeight={500}
-          color="gray.600"
+          color="gray.500"
         >
           Moderating
         </Text>
@@ -42,14 +50,14 @@ export const Communities: FC = () => {
           fontSize={{ base: "14pt", md: "8pt" }}
           mb={1}
           fontWeight={500}
-          color="gray.600"
+          color="gray.500"
         >
           MY Communities
         </Text>
         <MenuItem
           width="100%"
           fontSize="10pt"
-          _hover={{ bg: "gray.100" }}
+          _hover={{ bg: colorMode === "light" ? "gray.100" : "none" }}
           gap={2}
           alignContent="center"
           // justifyContent="center"
