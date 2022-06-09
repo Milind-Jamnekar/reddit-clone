@@ -5,6 +5,7 @@ import {
   AlertTitle,
   Flex,
   Icon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import {
@@ -56,6 +57,7 @@ const NewPostForm: FC<INewPostFormProps> = ({ user, communityImageURL }) => {
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const bg = useColorModeValue("white", "none");
 
   //handler for creating post in database
   const handleCreatePost = async () => {
@@ -126,7 +128,7 @@ const NewPostForm: FC<INewPostFormProps> = ({ user, communityImageURL }) => {
   };
 
   return (
-    <Flex direction="column" bg="white" borderRadius="4" mt="2">
+    <Flex direction="column" bg={bg} borderRadius="4" mt="2">
       {/* Tabs  */}
       <Flex width="100%">
         {formTabs.map((item) => (
