@@ -50,6 +50,7 @@ const Posts: React.FunctionComponent<IPostsProps> = ({ communityData }) => {
   useEffect(() => {
     getPosts();
   }, [communityData]);
+
   return (
     <>
       {loading ? (
