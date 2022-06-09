@@ -9,6 +9,7 @@ import {
   SkeletonCircle,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState, FC } from "react";
@@ -47,10 +48,14 @@ const Recommendation: FC = () => {
   useEffect(() => {
     getCommunityRecommendation();
   }, []);
+
+  const bg = useColorModeValue("white", "gray.700");
+  const dividerBg = useColorModeValue("gray.300", "gray.600");
+
   return (
     <Flex
       direction="column"
-      bg="white"
+      bg={bg}
       borderRadius={4}
       border="1px solid"
       borderColor="gray.300"
@@ -101,7 +106,7 @@ const Recommendation: FC = () => {
                     align="center"
                     fontSize="10pt"
                     borderBottom="1px solid"
-                    borderColor="gray.300"
+                    borderColor={dividerBg}
                     p="10px 12px"
                   >
                     <Flex width="100%" align="center">

@@ -1,11 +1,20 @@
-import { Flex, Icon, Text, Stack, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Text,
+  Stack,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { GiCheckedShield } from "react-icons/gi";
 
 const Premium = () => {
+  const bg = useColorModeValue("white", "gray.700");
+
   return (
     <Flex
       direction="column"
-      bg="white"
+      bg={bg}
       borderRadius={4}
       cursor="pointer"
       p="12px"
