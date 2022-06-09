@@ -11,6 +11,7 @@ import {
   Skeleton,
   Spinner,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import moment from "moment";
@@ -53,6 +54,7 @@ const PostItem: FC<IPostItemProps> = ({
   onVote,
   homePage,
 }) => {
+  const { colorMode } = useColorMode();
   const [error, setError] = useState("");
   const [loadingImage, setLoadinImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -99,8 +101,8 @@ const PostItem: FC<IPostItemProps> = ({
     <Flex
       as={motion.div}
       border="1px solid"
-      bg="white"
-      borderColor={singlePostPage ? "white" : "gray.300"}
+      bg={colorMode === "light" ? "white" : "none"}
+      borderColor={singlePostPage ? "white" : "gray.600"}
       borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
       _hover={{ borderColor: singlePostPage ? "white" : "gray.500" }}
       cursor={singlePostPage ? "unset" : "pointer"}
@@ -108,12 +110,20 @@ const PostItem: FC<IPostItemProps> = ({
       animate="animate"
       exit="exit"
       variants={variant}
+      mb={4}
     >
       {/* Voting section  */}
       <Flex
         direction={"column"}
         align="center"
-        bg={singlePostPage ? "none" : "gray.100"}
+        // bg={singlePostPage ? "none" : "gray.100"}
+        bg={
+          singlePostPage
+            ? "none"
+            : colorMode === "light"
+            ? "gray.100"
+            : "gray.700"
+        }
         p={2}
         width={["50px", "40px"]}
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
