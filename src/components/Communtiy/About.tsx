@@ -9,6 +9,7 @@ import {
   Spinner,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
@@ -30,6 +31,7 @@ interface IAboutProps {
 
 const About: FC<IAboutProps> = ({ communityData }) => {
   const router = useRouter();
+  const bg = useColorModeValue("white", "gray.700");
   const [user] = useAuthState(auth);
   const { setSelectedFile, selectedFile, onSelectedImage } = useSelectFile();
   const selectedFileRef = useRef<HTMLInputElement>(null);
@@ -75,7 +77,13 @@ const About: FC<IAboutProps> = ({ communityData }) => {
         </Text>
         <Icon as={HiOutlineDotsHorizontal} />
       </Flex>
-      <Flex direction="column" p={3} bg="white" borderRadius="4px 4px 0px 0px">
+      <Flex
+        direction="column"
+        p={3}
+        bg={bg}
+        borderRadius="4px 4px 0px 0px"
+        // outlineColor="red"
+      >
         <Stack>
           <Flex width="100%" p={2} fontSize="10pt" fontWeight="700">
             <Flex direction="column" flexGrow={1}>
