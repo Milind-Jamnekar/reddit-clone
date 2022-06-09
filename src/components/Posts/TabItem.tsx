@@ -16,11 +16,12 @@ const TabItem: FC<ITabItemProps> = ({ item, selected, setSelectedTab }) => {
       flexGrow={1}
       p="14px 0px"
       cursor="pointer"
-      _hover={{ bg: "gray.50" }}
+      _hover={{ bg: "gray.100" }}
       color={selected ? "blue.500" : "gray.500"}
-      borderWidth={selected ? "0px 1px 2px 0px" : "0px 1px 1px 0px"}
-      borderBottomColor={selected ? "blue.500" : "gray.200"}
+      borderWidth={selected ? "1px 1px 3px 1px" : "1px 1px 1px 1px"}
+      borderColor={selected ? "blue.500" : "gray.200"}
       borderRightColor="gray.200"
+      borderLeftColor="gray.200"
       onClick={() => setSelectedTab(item.title)}
       gap={2}
     >
