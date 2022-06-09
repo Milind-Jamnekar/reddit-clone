@@ -1,4 +1,13 @@
-import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import { FaReddit } from "react-icons/fa";
 import { BsBellFill } from "react-icons/bs";
@@ -16,6 +25,8 @@ const Header: FC<IHeaderProps> = ({ communityData }) => {
     (item) => item.communityId === communityData.id
   );
 
+  const bg = useColorModeValue("white", "whiteAlpha.50");
+
   return (
     <>
       <Flex direction="column" width="100%" height="220px">
@@ -31,7 +42,7 @@ const Header: FC<IHeaderProps> = ({ communityData }) => {
             />
           ) : null}
         </Box>
-        <Flex justify="center" bg="white" flexGrow={1}>
+        <Flex justify="center" bg={bg} flexGrow={1}>
           {/* Community Image  */}
           <Flex width="95%" maxWidth="860px" gap={2}>
             {communityStateValue.currentCommunity?.profileImageURL ? (
