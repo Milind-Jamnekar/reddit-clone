@@ -23,7 +23,6 @@ const CreatePostLink: FC = () => {
   const bg = useColorModeValue("white", "blackAlpha.600");
   const inputBg = useColorModeValue("white", "blackAlpha.300");
   const { colorMode } = useColorMode();
-  // const { toggleMenuOpen } = useDirectory();
   const onClick = () => {
     // Could check for user to open auth modal before redirecting to submit
     const { communityId } = router.query;
@@ -37,6 +36,7 @@ const CreatePostLink: FC = () => {
     // Open directory menu to select community to post to
     toggleMenuOpen();
   };
+
   return (
     <Flex
       justify="space-evenly"
@@ -44,8 +44,8 @@ const CreatePostLink: FC = () => {
       bg={bg}
       height="56px"
       borderRadius={5}
-      border={colorMode === "light" ? "1px solid" : "none"}
-      borderColor="gray.300"
+      border="1px solid"
+      borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
       p={2}
       gap={3}
       mb={4}
