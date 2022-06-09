@@ -17,6 +17,7 @@ import {
   ModalOverlay,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -107,6 +108,8 @@ export const CreateCommunityModal: FC<{
     setCharCount(21 - text.length);
   };
 
+  const footerBg = useColorModeValue("gray.200", "blackAlpha.600");
+
   return (
     <>
       <Modal isOpen={open} onClose={handleClose} size="xl">
@@ -128,7 +131,6 @@ export const CreateCommunityModal: FC<{
               flexDirection="column"
               padding="10px 0px"
               gap={3}
-              //   border="1px solid red"
             >
               <Box>
                 <Text fontSize={15} fontWeight={600}>
@@ -231,7 +233,7 @@ export const CreateCommunityModal: FC<{
             </ModalBody>
           </Box>
 
-          <ModalFooter bgColor="gray.200" borderRadius="0px 0px 10px 10px">
+          <ModalFooter bgColor={footerBg} borderRadius="0px 0px 10px 10px">
             <Button
               colorScheme="blue"
               mr={3}
