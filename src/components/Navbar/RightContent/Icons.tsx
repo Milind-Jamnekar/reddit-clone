@@ -48,7 +48,7 @@ export const Icons: FC = () => {
             <Icon as={IoVideocamOutline} fontSize={25} />
           </Flex>
         </Flex>
-        <Flex gap={2}>
+        <Flex display={{ base: "none", md: "flex" }} gap={2}>
           <Flex
             padding={1}
             cursor="pointer"
