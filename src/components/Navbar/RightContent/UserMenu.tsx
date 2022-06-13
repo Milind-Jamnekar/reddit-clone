@@ -30,7 +30,7 @@ type UserMenuProps = {
 
 export const UserMenu: FC<UserMenuProps> = ({ user }) => {
   const setAuthState = useSetRecoilState(authModalState);
-  const { toggleColorMode } = useColorMode();
+  const { colorMode , toggleColorMode } = useColorMode();
 
   const logout = async () => {
     await signOut(auth);
@@ -90,7 +90,7 @@ export const UserMenu: FC<UserMenuProps> = ({ user }) => {
       <MenuList mt={2}>
         <MenuItem fontSize="10pt" fontWeight="700" closeOnSelect={false}>
           <Flex gap={2} align="center">
-            <Switch onChange={toggleColorMode} />
+            <Switch isChecked={colorMode === "dark" ? true : false} onChange={toggleColorMode} />
             <Text>Dark Mode</Text>
           </Flex>
         </MenuItem>
