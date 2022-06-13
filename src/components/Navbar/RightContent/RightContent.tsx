@@ -14,7 +14,7 @@ const AuthModal = dynamic(() => import("../../Modal/Auth/AuthModal"));
 
 const RightContent: FC<RightContentProps> = ({ user }) => {
   return (
-    <Flex align="center" gap={2}>
+    <Flex align="center" gap={[1, 2]}>
       <AuthModal />
       {user ? <Icons /> : <AuthButtons />}
       <UserMenu user={user} />
