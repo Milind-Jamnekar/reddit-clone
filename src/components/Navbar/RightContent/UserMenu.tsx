@@ -15,12 +15,12 @@ import {
 import { signOut, User } from "firebase/auth";
 import React, { FC } from "react";
 import { CgProfile } from "react-icons/cg";
-import { useSetRecoilState } from "recoil";
 //Icons
 import { FaRedditSquare } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
+import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
 
@@ -55,7 +55,8 @@ export const UserMenu: FC<UserMenuProps> = ({ user }) => {
                   height="30px"
                   borderRadius="full"
                   alt=""
-                  mr={1}
+                  fallbackSrc="https://styles.redditmedia.com/t5_2683ei/styles/profileIcon_snoo447a9f26-c901-4e3c-8514-1ae2f46aa9d4-headshot-f.png?width=256&height=256&crop=256:256,smart&s=9eba0577229c81e9d64e68c085f11f5e97e8f455"
+                  mr={[5, 1]}
                 />
               ) : (
                 <Icon
@@ -104,6 +105,7 @@ export const UserMenu: FC<UserMenuProps> = ({ user }) => {
                     height="30px"
                     borderRadius="full"
                     alt=""
+                    fallbackSrc="https://styles.redditmedia.com/t5_2683ei/styles/profileIcon_snoo447a9f26-c901-4e3c-8514-1ae2f46aa9d4-headshot-f.png?width=256&height=256&crop=256:256,smart&s=9eba0577229c81e9d64e68c085f11f5e97e8f455"
                   />
                 ) : (
                   <Icon as={CgProfile} fontSize={25} />
