@@ -48,9 +48,9 @@ const CreatePostLink: FC = () => {
       borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
       p={2}
       gap={3}
-      mb={4}
+      mb={8}
       position="relative"
-      boxShadow="md"
+      boxShadow="lg"
     >
       {user?.photoURL ? (
         <Image
