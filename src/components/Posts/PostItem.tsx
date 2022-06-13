@@ -110,7 +110,7 @@ const PostItem: FC<IPostItemProps> = ({
       animate="animate"
       exit="exit"
       variants={variant}
-      mb={4}
+      mb={singlePostPage ? "0" : "5"}
     >
       {/* Voting section  */}
       <Flex
@@ -125,7 +125,8 @@ const PostItem: FC<IPostItemProps> = ({
             : "gray.700"
         }
         p={2}
-        width={["50px", "40px"]}
+        // width={["50px", "40px"]}
+        width="40px"
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
         gap={[1, null]}
       >
@@ -134,7 +135,7 @@ const PostItem: FC<IPostItemProps> = ({
             userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
           color={userVoteValue === 1 ? "brand.100" : "gray.400"}
-          fontSize={[35, 22]}
+          fontSize="22px"
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor={"pointer"}
         />
@@ -148,7 +149,7 @@ const PostItem: FC<IPostItemProps> = ({
               : IoArrowDownCircleOutline
           }
           color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
-          fontSize={[35, 22]}
+          fontSize="22"
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor={"pointer"}
         />
@@ -160,9 +161,9 @@ const PostItem: FC<IPostItemProps> = ({
         width="100%"
         onClick={() => onSelectPost && onSelectPost(post)}
       >
-        <Flex direction="column" p="10px">
-          {/* User Info  */}
-          <HStack>
+        {/* User Info  */}
+        <Flex direction="column">
+          <HStack p="10px">
             {/* Home Page check  */}
             {homePage && (
               <Flex align="center" gap={1}>
@@ -194,18 +195,23 @@ const PostItem: FC<IPostItemProps> = ({
           </HStack>
 
           {/* Post title  */}
-          <Text fontSize={["17pt", "14pt"]} fontWeight={600}>
+          <Text pl="10px" fontSize={["17pt", "14pt"]} fontWeight={600}>
             {post.title}
           </Text>
 
           {/* Post Body  */}
-          <Text mt={2} fontSize={["13pt", "10pt"]} noOfLines={[4, 2, 5]}>
+          <Text
+            px="10px"
+            mt={2}
+            fontSize={["13pt", "10pt"]}
+            noOfLines={[4, 2, 5]}
+          >
             {post.body}
           </Text>
 
           {/* Post Image if have any */}
           {post.imageURL && (
-            <Flex justify="center" align="center" p={2}>
+            <Flex justify="center" align="center">
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={4} />
               )}
