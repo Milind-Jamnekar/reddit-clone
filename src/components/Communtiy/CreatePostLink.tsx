@@ -59,6 +59,7 @@ const CreatePostLink: FC = () => {
           height="40px"
           borderRadius="full"
           alt={`${user.displayName} profile image`}
+          fallbackSrc="https://styles.redditmedia.com/t5_2683ei/styles/profileIcon_snoo447a9f26-c901-4e3c-8514-1ae2f46aa9d4-headshot-f.png?width=256&height=256&crop=256:256,smart&s=9eba0577229c81e9d64e68c085f11f5e97e8f455"
         />
       ) : (
         <Icon as={FaReddit} fontSize={36} color="gray.300" />
