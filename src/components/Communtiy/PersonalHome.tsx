@@ -8,10 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaReddit } from "react-icons/fa";
+import useDirectory from "../../hooks/useDirectory";
 import { CreateCommunityModal } from "../Modal/Community/CreateCommuntityModal";
 
 const PersonalHome = () => {
   const bg = useColorModeValue("white", "gray.700");
+  const { toggleMenuOpen } = useDirectory();
+
   const [isOpen, setOpen] = useState(false);
   return (
     <Flex
@@ -44,7 +47,9 @@ const PersonalHome = () => {
           <Text fontSize="9pt">
             Your personal Reddit frontpage, built for you.
           </Text>
-          <Button height="30px">Create Post</Button>
+          <Button height="30px" onClick={() => toggleMenuOpen()}>
+            Create Post
+          </Button>
           <Button variant="outline" height="30px" onClick={() => setOpen(true)}>
             Create Community
           </Button>
