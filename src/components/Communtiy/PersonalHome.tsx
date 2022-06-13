@@ -13,6 +13,8 @@ import { CreateCommunityModal } from "../Modal/Community/CreateCommuntityModal";
 
 const PersonalHome = () => {
   const bg = useColorModeValue("white", "gray.700");
+  const borderBg = useColorModeValue("gray.300", "gray.600");
+
   const { toggleMenuOpen } = useDirectory();
 
   const [isOpen, setOpen] = useState(false);
@@ -22,7 +24,7 @@ const PersonalHome = () => {
       bg={bg}
       borderRadius={4}
       border="1px solid"
-      borderColor="gray.300"
+      borderColor={borderBg}
       position="sticky"
     >
       <CreateCommunityModal open={isOpen} handleClose={() => setOpen(false)} />

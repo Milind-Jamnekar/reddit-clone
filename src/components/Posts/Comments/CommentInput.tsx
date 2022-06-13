@@ -1,4 +1,10 @@
-import { Button, Flex, Text, Textarea } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Text,
+  Textarea,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { FC } from "react";
 import AuthButtons from "../../Navbar/RightContent/AuthButtons";
@@ -18,6 +24,8 @@ const CommentInput: FC<CommentInputProps> = ({
   user,
   onCreateComment,
 }) => {
+  const bg = useColorModeValue("white", "gray.500");
+
   return (
     <Flex direction="column" position="relative">
       {user ? (
@@ -39,7 +47,6 @@ const CommentInput: FC<CommentInputProps> = ({
             _placeholder={{ color: "gray.500" }}
             _focus={{
               outline: "none",
-              bg: "white",
               border: "1px solid black",
             }}
           />
@@ -49,7 +56,7 @@ const CommentInput: FC<CommentInputProps> = ({
             right={0.1}
             bottom="1px"
             justify="flex-end"
-            bg="gray.100"
+            bg={bg}
             p="6px 8px"
             borderRadius="0px 0px 4px 4px"
           >

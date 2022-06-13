@@ -58,7 +58,7 @@ const Recommendation: FC = () => {
       bg={bg}
       borderRadius={4}
       border="1px solid"
-      borderColor="gray.300"
+      borderColor={dividerBg}
     >
       <Flex
         align="flex-end"

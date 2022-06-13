@@ -102,9 +102,9 @@ const PostItem: FC<IPostItemProps> = ({
       as={motion.div}
       border="1px solid"
       bg={colorMode === "light" ? "white" : "none"}
-      borderColor={singlePostPage ? "white" : "gray.600"}
+      borderColor="gray.600"
       borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
-      _hover={{ borderColor: singlePostPage ? "white" : "gray.500" }}
+      _hover={{ borderColor: "gray.500" }}
       cursor={singlePostPage ? "unset" : "pointer"}
       initial="initial"
       animate="animate"

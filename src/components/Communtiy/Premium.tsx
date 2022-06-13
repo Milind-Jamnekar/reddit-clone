@@ -9,6 +9,7 @@ import {
 import { GiCheckedShield } from "react-icons/gi";
 
 const Premium = () => {
+  const borderBg = useColorModeValue("gray.300", "gray.600");
   const bg = useColorModeValue("white", "gray.700");
 
   return (
@@ -19,7 +20,7 @@ const Premium = () => {
       cursor="pointer"
       p="12px"
       border="1px solid"
-      borderColor="gray.300"
+      borderColor={borderBg}
     >
       <Flex mb={2}>
         <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />

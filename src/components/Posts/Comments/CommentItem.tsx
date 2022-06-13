@@ -34,7 +34,7 @@ const CommentItem: FC<CommentItemProps> = ({
         <Icon as={FaReddit} color="gray.300" />
       </Box>
       <Stack spacing={1}>
-        <Stack direction="row" align="center " fontSize="8pt">
+        <Stack direction="row" align="center " fontSize="10pt">
           <Text fontWeight="700">{comment.creatorDisplayText}</Text>
           {postStateValue.selectedPost?.creatorId === userId && (
             <Text textColor="rgb(0 121 211)" fontWeight={700}>
@@ -51,7 +51,7 @@ const CommentItem: FC<CommentItemProps> = ({
             onChange={(e) => setEditText(e.target.value)}
           />
         ) : (
-          <Text fontSize="10pt">{comment.text}</Text>
+          <Text fontSize="14pt">{comment.text}</Text>
         )}
         <Stack
           direction="row"
@@ -65,25 +65,23 @@ const CommentItem: FC<CommentItemProps> = ({
             (editInput ? (
               <>
                 <Button
-                  fontSize="9pt"
-                  bg="white"
-                  p="0"
-                  color="gray.400"
+                  fontSize="8pt"
+                  variant="ghost"
+                  size="xs"
+                  colorScheme="blue"
                   onClick={() => {
                     onUpdateComment(comment.id, editText);
                     setEditInput(false);
                   }}
-                  _hover={{ color: "blue.600", bg: "blue:100" }}
                 >
                   Save
                 </Button>
                 <Button
-                  fontSize="9pt"
-                  bg="white"
-                  p="0"
-                  color="gray.400"
+                  size="xs"
+                  fontSize="8pt"
+                  variant="ghost"
+                  colorScheme="blue"
                   onClick={() => setEditInput(false)}
-                  _hover={{ color: "blue.600", bg: "blue:100" }}
                 >
                   Cancel
                 </Button>
@@ -91,22 +89,20 @@ const CommentItem: FC<CommentItemProps> = ({
             ) : (
               <>
                 <Button
-                  fontSize="9pt"
-                  bg="white"
-                  p="0"
-                  color="gray.400"
+                  fontSize="8pt"
+                  size="xs"
+                  variant="ghost"
+                  colorScheme="blue"
                   onClick={() => setEditInput(true)}
-                  _hover={{ color: "blue.600", bg: "blue:100" }}
                 >
                   Edit
                 </Button>
                 <Button
-                  fontSize="9pt"
+                  fontSize="8pt"
+                  size="xs"
+                  variant="ghost"
+                  colorScheme="blue"
                   isLoading={loadingDelete}
-                  bg="white"
-                  p="1"
-                  color="gray.400"
-                  _hover={{ color: "red.300" }}
                   onClick={() => onDeleteComment(comment)}
                 >
                   Delete
