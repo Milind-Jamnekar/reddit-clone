@@ -4,13 +4,13 @@ import {
   Flex,
   Icon,
   Image,
+  Img,
   Text,
-  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import { FaReddit } from "react-icons/fa";
 import { BsBellFill } from "react-icons/bs";
+import { FaReddit } from "react-icons/fa";
 import { Community } from "../../atoms/communitiesAtom";
 import { useCommunityData } from "../../hooks/useCommunityData";
 
@@ -38,7 +38,7 @@ const Header: FC<IHeaderProps> = ({ communityData }) => {
               width="100%"
               height="full"
               loading="lazy"
-              alt={`r${communityData.id} background image`}
+              alt=""
             />
           ) : null}
         </Box>
@@ -53,7 +53,7 @@ const Header: FC<IHeaderProps> = ({ communityData }) => {
                 margin="-20px 0px 0px"
                 borderRadius="50%"
                 border="4px solid white"
-                alt={`community ${communityData.id} profile image`}
+                alt=""
               />
             ) : (
               <Icon
