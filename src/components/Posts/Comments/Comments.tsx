@@ -176,8 +176,8 @@ const Comments: FC<ICommentsProps> = ({ user, selectedPost, communityId }) => {
     <Box bg="white" borderRadius="0px 0px 4px 4px" p={2}>
       <Flex
         direction="column"
-        pl={10}
-        pr={4}
+        pl={["2", null, "10"]}
+        pr={["1", "4"]}
         mb={6}
         fontSize={"10pt"}
         width="100%"
